@@ -46,6 +46,23 @@ p{
     height: 100%;
 }
 
+.banner_section.new_baner {
+    background-image: url(../img/banner_3.png);
+    background-size: cover;
+    position: relative;
+    background-position: bottom right;
+}
+
+.banner_section.new_baner::before {
+    background: #dcdcdc17;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .login_section {
     max-width: 900px;
     margin: 0 auto;
@@ -94,7 +111,7 @@ p{
 .nw_btn:hover,
 .nw_btn:focus,
 .nw_btn:active{
-    background:transparent;
+    background:#fff;
    color:#0b1a29; 
    outline:none !important;
 }
@@ -327,26 +344,19 @@ display: -webkit-box;
 display: -webkit-flex;
 display: -ms-flexbox;
 display: flex;
-margin:15px 0;
+margin:5px 0;
+font-size: 13px;
 }
 
 .flex_sec label{
     margin-bottom: 0px;
 }
 
-.flex_sec label:nth-child(2){
- font-weight: normal;
- margin-left: 10px;
+.flex_sec label:nth-child(2) {
+    font-weight: normal;
+    margin-left: 15px;
 }
 
-.flex_sec {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 15px 0;
-    font-size:14px;
-}
 
 .welsec h1 {
     margin: 20px 0;
@@ -354,11 +364,11 @@ margin:15px 0;
     font-weight: 600;
 }
 .flex_sec label {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .buttosec {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .buttosec button:first-child{
     margin-right:10px;
@@ -370,7 +380,7 @@ margin:15px 0;
     height: 150px;
     background: #dfdfdf;
     border-radius: 50%;
-    margin: 70px auto;
+    margin:25px auto;
     position: relative;
     overflow: hidden;
     padding: 0;
@@ -411,15 +421,16 @@ ul.nav.nav-tabs.all_tabsec {
     margin-top: 10px;
     border-radius: 5px 5px 0 0;
     padding: 5px 1px 0;
+    position: relative;
+    top: 1px;
 }
-
 
 ul.nav.nav-tabs.all_tabsec li a {
     color: rgba(255,255,255,0.9);
 }
 
 ul.nav.nav-tabs.all_tabsec>li>a {
-    padding: 10px 10px;
+    padding: 10px 12px;
     font-size: 13px;
     transition: 0.3s;
 }
@@ -439,18 +450,11 @@ ul.nav.nav-tabs.all_tabsec li a:hover,
     font-weight: 600;
 }
 
-@media(min-width:992px){
-  .wlcom_full .container:last-child {
-    margin: 20px auto;
-    max-width: 60%;
-}
-
-}
 
 
 @media(max-width:991px){
 .img_choose {
-    margin: 30px 0px;
+    margin: 15px 0px;
 }
 
 .buttosec button{
@@ -472,10 +476,9 @@ label {
 .tab-content.all_tabinside {
     padding: 15px 15px;
     border: 1px solid #0b1a29;
-    border-top: rebeccapurple;
+    border-top: #ffffff;
     border-radius: 0 0 5px 5px;
 }
-
 .all_tabinside .form-group {
     margin-bottom: 15px;
     min-height: 65px;
@@ -581,13 +584,18 @@ p.note_all {
 
 
 .address_sec{
-display: inline-block;
+    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
- }   
+ } 
+
+
+ .enter_code_bx{
+    display: none;
+ }  
 
 
  @media(max-width:1100px){
@@ -595,3 +603,181 @@ display: inline-block;
     min-width:1000px;
   }
  }
+
+ @media (min-width: 1000px) {
+    #registration_modl .modal-dialog {
+        width: 950px;
+        margin: 30px auto;
+    }
+    #registration_modl .modal-body{
+        padding: 30px !important;
+    }
+
+} 
+
+
+/***profile detail box***/
+
+
+.welcome_section .login_section {
+    max-width: 1150px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px 30px;
+    position: relative;
+    top: -100px;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: 1px solid #ccc;
+}
+
+.welcome_section .text_lg h1 {
+    font-size: 40px !important;
+}
+
+
+.password_area{
+    display: none;
+}
+
+#validate_code,
+#nextStp{
+    display: none;
+}
+
+#registration_modl .modal-body {
+    padding-bottom: 30px !important;
+}
+
+p.note_all.position {
+    position: absolute;
+    bottom: 7px;
+}
+
+#registration_modl .modal-footer{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+   
+    justify-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.user_welcome h5 {
+    position: relative;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: 'BasierSquare-Regular';
+    color: #0b1a29;
+    margin:5px 30px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.user_welcome h5::before {
+    content: '';
+    width: 30px;
+    border-top: 2px solid #000;
+    position: absolute;
+    left: -40px;
+    top: 11px;
+}
+.user_welcome h5::after {
+    content: '';
+    width: 30px;
+    border-top: 2px solid #000;
+    position: absolute;
+    right: -40px;
+    top: 11px;
+}
+
+.user_welcome h1 {
+    font-size: 30px !important;
+    font-weight: 800;
+    font-family: 'BasierSquare-Regular';
+    color: #0b1a29;
+    margin:10px 0;
+    line-height: 1.2;
+}
+
+.sepreate {
+    margin:20px 0;
+}
+
+.sepreate p {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 3px 0;
+}
+
+
+.usr_incircle {
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px -2px #ccc;
+    margin: 0 auto;
+}
+.usr_incircle img{
+    width:100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nw_btn.two_event {
+    font-size: 16px;
+    min-height: 45px;
+    transition: 0.2s;
+    min-width: 110px;
+    margin:5px;
+}
+
+.change_pas {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    margin-top: 300px;
+}
+
+@media(max-width:995px){
+
+.usr_incircle {
+    margin: 10px 10px;
+}
+.change_pas{
+    text-align: left !important;
+}
+
+.change_pas {
+    margin-top:10px;
+}
+
+}
+
+/****password show and hide****/
+
+.pass_viw{
+    position: relative;
+}
+
+.pass_viw input {
+    padding-right: 30px;
+}
+
+.pass_viw .eye_event {
+    position: absolute;
+    z-index: 3;
+    top: 10px;
+    right: 10px;
+    width: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+}

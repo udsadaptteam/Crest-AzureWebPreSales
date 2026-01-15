@@ -64,7 +64,7 @@
 <section class="welcome_section">
 <div class="topsec">
   <div class="container">
-    <img src="img/logo.svg" alt="">
+    <img src="img/logo.svg" alt=""/>
     <div class="user_area pull-right">
       <div class="user_bx">
         <h5>Welcome</h5>
@@ -76,64 +76,52 @@
     </div>
  </div>
 </div>
-
-<div class="wlcom_full">
- <div class="container">
-  <a href="#" style="float:right; font-size:16px; margin:10px 0; font-weight:600; text-decoration: none;" onclick="signOut()">Sign out</a>
+<div class="banner_section new_baner">
+  <div class="container">
+  <a href="#" style="float:right; font-size:16px; margin:10px 0; font-weight:600; color:#337ab7; text-decoration: none; position: relative; z-index:5;" onclick="signOut()">Sign out</a>
  </div>
-  <div class="container">   
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="img_choose">
-          <img src="img/user-circle.png" alt="">
-          <label class="click_area">
-            Choose image
-            <input type="file">
-          </div>
-        </div>
-        <div class="col-sm-8">
-        <div class="welsec">
-          <h1>Welcome</h1>
-          <div class="flex_sec">
-            <label>Name</label> : <label class="detail_show">Mr. Abcd</label>
-          </div>
-          <div class="flex_sec">
-            <label>Contact Number</label> : <label class="detail_show">98676677</label>
-          </div>
-          <div class="flex_sec">
-            <label>Company</label> : <label class="detail_show">TFV Lab Inc.</label>
-          </div>
-          <div class="flex_sec">
-            <label>Designation</label> : <label class="detail_show">Manager</label>
-          </div>
-          <div class="flex_sec">
-            <label>Address</label> : <label class="detail_show">Delhi</label>
-          </div>
-          <div class="flex_sec">
-            <label>Address</label> : <label class="detail_show">Delhi</label>
-          </div>
-          <div class="flex_sec">
-            <label>City</label> : <label class="detail_show">Delhi</label>
-          </div>
-          <div class="flex_sec">
-            <label>State</label> : <label class="detail_show">Delhi</label>
-          </div>
-          <div class="flex_sec">
-            <label>Zip Code</label> : <label class="detail_show">110097</label>
-          </div>
-          <div class="flex_sec">
-            <label>Country</label> : <label class="detail_show">India</label>
-          </div>
-          <div class="buttosec">
-            <button class="btn nw_btn min_wth" type="button" onclick="pros_application()">Prospect Application</button>
-            <button class="btn nw_btn min_wth" type="button" data-toggle="modal" data-target="#updateprofile">Update My Profile</button>
-          </div>
+</div>
+<div class="login_section">
+<div class="row">
+      <div class="col-sm-5">
+        <div class="text_lg">
+          <h1>
+          Hola, We're<br>
+          <span>excited</span> to work<br>
+          With you!
+          </h1>
+        <p>Your secure portal for personalized information and a seamless entry into our franchise system.</p>
         </div>
       </div>
-    </div>
-  </div>
-  </div>
-</div>
+      <div class="col-sm-7">
+        
+        <div class="col-md-4 col-md-push-8">
+          <div class="usr_incircle">
+            <img src="img/user-circle.png" alt="">
+          </div>
+        </div>
+        <div class="col-md-8 col-md-pull-4 rightBx">
+          <div class="user_welcome">
+            <h5>Welcome</h5>
+            <h1>Mr. Dipankar Goswami</h1>
+            <div class="sepreate">
+               <p>Manager</p>
+              <p>TFW Lab Inc.</p>
+            </div>
+          </div>
+        <div class="forget">
+          <p class="note_all" style="color:#337ab7; font-weight:600;">Please Press any Button to continue</p>
+          <br>
+          <button class="btn nw_btn two_event" type="buton" onclick="pros_application()">Prospect Application</button>
+          <button class="btn nw_btn two_event" type="buton" data-toggle="modal" data-target="#updateprofile">Update My Profile</button>
+        </div>
+        </div>
+
+      </div>
+     
+    </div> 
+
+  </div>  
 
 </section>
 
@@ -153,53 +141,124 @@
          
          <div class="both_coverstp">
          <div class="first_page step active">
-            <div class="form-group">
-            <label>Your Email:</label><label class="reding">*</label>
-            <div class="both_flx">
-              <input type="text" class="form-control">
-              <button type="button" class="btn nw_btn">Send Verification code</button>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+              <label>Your Email:</label><label class="reding">*</label>
+                <input type="text" class="form-control" id="youEmail">
             </div>
-          </div>
-          <div class="form-group">
-            <label>Enter Code:</label><label class="reding">*</label>
-            <div class="both_flx">
-              <input type="text" class="form-control">
-              <button type="button" class="btn nw_btn">Validate code</button>
+            <div class=" form-group enter_code_bx">
+              <label>Enter Code:</label><label class="reding">*</label>
+                <input type="text" class="form-control" id="enterCode">
             </div>
+            <div class="password_area">
+              <div class=" form-group">
+                <label>New Password:</label><label class="reding">*</label>
+                <div class="pass_viw">
+                  <input type="password" class="form-control">
+                  <img src="img/eye-close.png" class="eye_event"> 
+                </div>
+              </div>      
+              <div class="form-group">
+                <label>Confirm Password:</label><label class="reding">*</label>
+                <div class="pass_viw">
+                  <input type="password" class="form-control">
+                  <img src="img/eye-close.png" class="eye_event"> 
+                </div>
+              </div>
+            </div>
+          
+          <div class="modal-footer flexing" style="text-align:center; border-top-color:transparent; padding:5px;">
+             
+            <button type="button" class="btn nw_btn min_wth" id="send_verfication_code" onclick="verify_cod(this)"> Send Verification code</button>
+            
+            <button type="button" class="btn nw_btn min_wth" id="validate_code" onclick="verify_cod(this)"> Validate code</button>
+
+           <button type="button" class="btn nw_btn next min_wth" id="nextStp">Next</button>
           </div>
-          <div class="form-group">
-            <label>New Password:</label><label class="reding">*</label>
-              <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Confirm Password:</label><label class="reding">*</label>
-              <input type="text" class="form-control">
+          
           </div>
 
-          <p style="margin:15px 0;color:#000;">Note: all <span class="reding"></span> marked fields are mandatory to fill</p>
-          
-          <div class="modal-footer" style="text-align:center; border-top-color:transparent; padding:5px;">
-           <button type="button" class="btn nw_btn next min_wth">Next</button>
           </div>
+          <p class="note_all position">Note: all <span class="reding"></span> marked fields are mandatory to fill</p>
          </div><!----page one---->
         
          <div class="second_page step">
-          <div class="form-group">
-            <label>Your Name:</label><label class="reding">*</label>
-              <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Contact Number:</label><label class="reding">*</label>
-              <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Company Name:</label>
-              <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Your Remarks:</label>
-              <textarea class="form-control" style="min-height:110px; resize: none;"></textarea>
-          </div>
+            
+          <div class="row">
+             <div class="col-md-4">
+                <div class="img_choose">
+                  <img src="img/user-circle.png" alt="">
+                  <label class="click_area">
+                    Choose image
+                    <input type="file">
+                  </label>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                  
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>First Name:</label><label class="reding">*</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Middle Name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Last Name:</label><label class="reding">*</label><input type="text" class="form-control">
+                  </div>
+                </div>
+           
+                  <div class="col-md-12 form-group">
+                    <label>Company Name</label>: 
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Contact Number</label>: <label class="reding">*</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  
+                  <div class="col-md-6 form-group">
+                    <label>Designation</label>: 
+                    <input type="text" class="form-control">
+                  </div>
+                </div><!---row ed-->
+
+                <div class="form-group">
+                  <label>Address</label>: 
+                  <textarea type="text" class="form-control" style="min-height: 110px; resize:none;"></textarea>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label>City</label>:
+                    <input type="text" class="form-control">
+                  </div>
+                  
+                  <div class="col-md-6 form-group">
+                    <label>State</label>: 
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Zip Code</label>: 
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Country</label>: 
+                    <select class="form-control">
+                      <option selected>--select--</option>
+                    </select>
+                  </div>
+                </div><!-----row ed---->
+            </div>
+           </div>  
+
           <div class="modal-footer" style="text-align:center; border-top-color:transparent; padding:5px;">
             <button type="button" id="submiting_details" class="btn nw_btn submit min_wth" onclick="signIn(this)">Submit</button>
           </div>
@@ -235,23 +294,39 @@
                 <input type="file">
               </label>
             </div>
+            <a href="#change_passwrd" data-toggle="modal" style="color:#337ab7;" class="change_pas">Change password</a>
         </div>
         <div class="col-md-8">
-            <div class="form-group">
-              <label>Your Name</label>: <label class="reding">*</label>
-              <input type="text" class="form-control">
-            </div>
             <div class="row">
+              
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>First Name:</label><label class="reding">*</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Middle Name:</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Last Name:</label><label class="reding">*</label><input type="text" class="form-control">
+              </div>
+            </div>
+       
+              <div class="col-md-12 form-group">
+                <label>Company Name</label>: 
+                <input type="text" class="form-control">
+              </div>
               <div class="col-md-6 form-group">
                 <label>Contact Number</label>: <label class="reding">*</label>
                 <input type="text" class="form-control">
               </div>
               
               <div class="col-md-6 form-group">
-                <label>Company Name</label>: 
-                <input type="text" class="form-control">
-              </div>
-              <div class="col-md-12 form-group">
                 <label>Designation</label>: 
                 <input type="text" class="form-control">
               </div>
@@ -273,9 +348,7 @@
               </div>
               <div class="col-md-6 form-group">
                 <label>Zip Code</label>: 
-                <select class="form-control">
-                  <option selected>--select--</option>
-                </select>
+                <input type="text" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label>Country</label>: 
@@ -293,9 +366,54 @@
         </button>
       </div>
     </div>
-
+   
   </div>
 </div>
+
+<!---- change_passwrd ---->
+<div id="change_passwrd" class="modal fade" role="dialog" style="background:rgba(0,0,0,0.5)"> 
+  <div class="modal-dialog">
+    <!---- Modal content ---->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close close-round" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change password</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="form-group">
+          <label>Old Password:</label>
+          <div class="pass_viw">
+            <input type="password" class="form-control">
+            <img src="img/eye-close.png" class="eye_event"> 
+          </div>    
+        </div> 
+
+        <div class="form-group">
+          <label>New Password:</label>
+          <div class="pass_viw">
+            <input type="password" class="form-control">
+            <img src="img/eye-close.png" class="eye_event"> 
+          </div>    
+        </div>
+        
+        <div class="form-group pass_viw">
+          <label>Confirm Password:</label>
+          <div class="pass_viw">
+            <input type="password" class="form-control">
+            <img src="img/eye-close.png" class="eye_event"> 
+          </div>    
+        </div> 
+      </div>
+      <div class="modal-footer" style="padding:15px; text-align: center;">
+        <button type="button" class="btn nw_btn min_wth">
+          Submit
+        </button>
+      </div>
+    </div>
+ </div>
+</div>
+
 
  <script src="js/commen.js"></script>  
  
@@ -303,3 +421,6 @@
 
 </body>
 </html>
+
+
+
