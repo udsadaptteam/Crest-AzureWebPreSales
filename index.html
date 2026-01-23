@@ -37,17 +37,17 @@
         <div class="rightBx">
         <div class="form-group">
           <label>Your Email :</label>
-          <input type="email" class="form-control">
+          <input type="email" id="txtEmail" class="form-control">
         </div>
         <div class="form-group">
           <label>Password :</label>
-          <input type="Password" class="form-control">
+          <input type="Password" id="txtPassword" class="form-control">
         </div>
         
         <div class="forget">
-          <a href="#">Forget your password?</a>
+          <a href="#" id="lnkForgotPassword">Forget your password?</a>
           <br>
-          <button class="btn nw_btn min_wth" type="buton" style="margin-top:30px;" onclick="signIn(this)">Sign in</button>
+          <button class="btn nw_btn min_wth" type="buton" style="margin-top:30px;" id="btnLogin">Sign in</button>
         </div>
         </div>
       </div>
@@ -68,10 +68,10 @@
     <div class="user_area pull-right">
       <div class="user_bx">
         <h5>Welcome</h5>
-        <p>Mr. XYZ Jonson</p>
+        <p id="topUserName">Mr. XYZ Jonson</p>
       </div>
       <div class="img_circle">
-        <img src="img/user-circle.png" alt="">
+        <img  id="navUserpic" src="img/user-circle.png" alt="">
       </div>
     </div>
  </div>
@@ -97,23 +97,23 @@
         
         <div class="col-md-4 col-md-push-8">
           <div class="usr_incircle">
-            <img src="img/user-circle.png" alt="">
+            <img  id="userImage"   alt="">
           </div>
         </div>
         <div class="col-md-8 col-md-pull-4 rightBx">
           <div class="user_welcome">
             <h5>Welcome</h5>
-            <h1>Mr. Dipankar Goswami</h1>
+            <h1 id="mainUserName">Mr. Dipankar Goswami</h1>
             <div class="sepreate">
-               <p>Manager</p>
-              <p>TFW Lab Inc.</p>
+               <p id="userRole">Manager</p>
+              <p id="companyName">TFW Lab Inc.</p>
             </div>
           </div>
         <div class="forget">
           <p class="note_all" style="color:#337ab7; font-weight:600;">Please Press any Button to continue</p>
           <br>
           <button class="btn nw_btn two_event" type="buton" onclick="pros_application()">Prospect Application</button>
-          <button class="btn nw_btn two_event" type="buton" data-toggle="modal" data-target="#updateprofile">Update My Profile</button>
+          <button class="btn nw_btn two_event" type="buton" data-toggle="modal"   id="btnUpdateProfile" onclick="getProfileData()">Update My Profile</button>
         </div>
         </div>
 
@@ -155,14 +155,14 @@
               <div class=" form-group">
                 <label>New Password:</label><label class="reding">*</label>
                 <div class="pass_viw">
-                  <input type="password" class="form-control">
+                  <input type="password" id="AddnewPassword" class="form-control">
                   <img src="img/eye-close.png" class="eye_event"> 
                 </div>
               </div>      
               <div class="form-group">
                 <label>Confirm Password:</label><label class="reding">*</label>
                 <div class="pass_viw">
-                  <input type="password" class="form-control">
+                  <input type="password" id="AddconfirmPassword" class="form-control">
                   <img src="img/eye-close.png" class="eye_event"> 
                 </div>
               </div>
@@ -170,11 +170,11 @@
           
           <div class="modal-footer flexing" style="text-align:center; border-top-color:transparent; padding:5px;">
              
-            <button type="button" class="btn nw_btn min_wth" id="send_verfication_code" onclick="verify_cod(this)"> Send Verification code</button>
+        <button type="button" class="btn nw_btn min_wth" id="send_verfication_code" onclick="sendVerificationCode(this)"> Send Verification code</button>
             
-            <button type="button" class="btn nw_btn min_wth" id="validate_code" onclick="verify_cod(this)"> Validate code</button>
+            <button type="button" class="btn nw_btn min_wth" id="validate_code" onclick="validateCode(this)"> Validate code</button>
 
-           <button type="button" class="btn nw_btn next min_wth" id="nextStp">Next</button>
+           <button type="button" class="btn nw_btn next min_wth" id="nextStp" onclick="AddNewPassword();">Next</button>
           </div>
           
           </div>
@@ -188,10 +188,10 @@
           <div class="row">
              <div class="col-md-4">
                 <div class="img_choose">
-                  <img src="img/user-circle.png" alt="">
+                  <img id="profilePreview" src="img/user-circle.png" alt="">
                   <label class="click_area">
                     Choose image
-                    <input type="file">
+                    <input type="file" id="profileImage" accept="image/*">
                   </label>
                 </div>
             </div>
@@ -201,57 +201,57 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>First Name:</label><label class="reding">*</label>
-                    <input type="text" class="form-control">
+                    <input type="text" id="AddfirstName" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Middle Name:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" id="AddmiddleName" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Last Name:</label><label class="reding">*</label><input type="text" class="form-control">
+                    <label>Last Name:</label><label class="reding">*</label><input type="text" id="AddlastName" class="form-control">
                   </div>
                 </div>
            
                   <div class="col-md-12 form-group">
                     <label>Company Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" id="AddcompanyName" class="form-control">
                   </div>
                   <div class="col-md-6 form-group">
                     <label>Contact Number</label>: <label class="reding">*</label>
-                    <input type="text" class="form-control">
+                    <input type="text" id="AddcontactNumber" class="form-control">
                   </div>
                   
                   <div class="col-md-6 form-group">
                     <label>Designation</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" id="Adddesignation" class="form-control">
                   </div>
                 </div><!---row ed-->
 
                 <div class="form-group">
                   <label>Address</label>: 
-                  <textarea type="text" class="form-control" style="min-height: 110px; resize:none;"></textarea>
+                  <textarea type="text" class="form-control" id="Addaddress" style="min-height: 110px; resize:none;"></textarea>
                 </div>
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <label>City</label>:
-                    <input type="text" class="form-control">
+                    <input type="text" id="Addcity" class="form-control">
                   </div>
                   
                   <div class="col-md-6 form-group">
                     <label>State</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" id="Addstate" class="form-control">
                   </div>
                   <div class="col-md-6 form-group">
                     <label>Zip Code</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" id="AddzipCode" class="form-control">
                   </div>
                   <div class="col-md-6 form-group">
                     <label>Country</label>: 
-                    <select class="form-control">
+                    <select class="form-control" id="countrySelect">
                       <option selected>--select--</option>
                     </select>
                   </div>
@@ -260,7 +260,7 @@
            </div>  
 
           <div class="modal-footer" style="text-align:center; border-top-color:transparent; padding:5px;">
-            <button type="button" id="submiting_details" class="btn nw_btn submit min_wth" onclick="signIn(this)">Submit</button>
+            <button type="button" id="submiting_details" class="btn nw_btn submit min_wth" onclick="AddsignIn(this)">Submit</button>
           </div>
          </div><!--second step--->
 
@@ -288,10 +288,10 @@
        <div class="row">
          <div class="col-md-4">
             <div class="img_choose">
-              <img src="img/user-circle.png" alt="">
+              <img id="UpdateprofileImage" src="img/user-circle.png" alt="">
               <label class="click_area">
                 Choose image
-                <input type="file">
+                <input type="file" id="UpdateprofileImageInput">
               </label>
             </div>
             <a href="#change_passwrd" data-toggle="modal" style="color:#337ab7;" class="change_pas">Change password</a>
@@ -302,57 +302,57 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>First Name:</label><label class="reding">*</label>
-                <input type="text" class="form-control">
+                <input type="text" id="UpdatefirstName" class="form-control">
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Middle Name:</label>
-                <input type="text" class="form-control">
+                <input type="text" id="UpdatemiddleName" class="form-control">
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label>Last Name:</label><label class="reding">*</label><input type="text" class="form-control">
+                <label>Last Name:</label><label class="reding">*</label><input type="text" id="UpdatelastName" class="form-control">
               </div>
             </div>
        
               <div class="col-md-12 form-group">
                 <label>Company Name</label>: 
-                <input type="text" class="form-control">
+                <input type="text" id="UpdatecompanyName" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label>Contact Number</label>: <label class="reding">*</label>
-                <input type="text" class="form-control">
+                <input type="text" id="UpdatecontactNumber" class="form-control">
               </div>
               
               <div class="col-md-6 form-group">
                 <label>Designation</label>: 
-                <input type="text" class="form-control">
+                <input type="text" id="Updatedesignation" class="form-control">
               </div>
             </div><!---row ed-->
 
             <div class="form-group">
               <label>Address</label>: 
-              <textarea type="text" class="form-control" style="min-height: 110px; resize:none;"></textarea>
+              <textarea type="text" id="Updateaddress" class="form-control" style="min-height: 110px; resize:none;"></textarea>
             </div>
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>City</label>:
-                <input type="text" class="form-control">
+                <input type="text" id="Updatecity" class="form-control">
               </div>
               
               <div class="col-md-6 form-group">
                 <label>State</label>: 
-                <input type="text" class="form-control">
+                <input type="text" id="Updatestate" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label>Zip Code</label>: 
-                <input type="text" class="form-control">
+                <input type="text" id="UpdatezipCode" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label>Country</label>: 
-                <select class="form-control">
+                <select class="form-control"  id="Updatecountry">
                   <option selected>--select--</option>
                 </select>
               </div>
@@ -361,7 +361,7 @@
        </div>
       </div>
       <div class="modal-footer" style="padding:15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">
+        <button type="button" class="btn nw_btn min_wth" onclick="updateProfile();">
           Submit
         </button>
       </div>
@@ -392,7 +392,7 @@
         <div class="form-group">
           <label>New Password:</label>
           <div class="pass_viw">
-            <input type="password" class="form-control">
+            <input type="password" id="newPassword" class="form-control">
             <img src="img/eye-close.png" class="eye_event"> 
           </div>    
         </div>
@@ -400,13 +400,14 @@
         <div class="form-group pass_viw">
           <label>Confirm Password:</label>
           <div class="pass_viw">
-            <input type="password" class="form-control">
+            <input type="password" id="confirmPassword" class="form-control">
             <img src="img/eye-close.png" class="eye_event"> 
           </div>    
         </div> 
       </div>
       <div class="modal-footer" style="padding:15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">
+        <button type="button" class="btn nw_btn min_wth" id="resetPasswordBtn"
+        onclick="resetPassword(this)">
           Submit
         </button>
       </div>
@@ -416,7 +417,7 @@
 
 
  <script src="js/commen.js"></script>  
- 
+  <script src="js/index.js"></script>   
 
 
 </body>
