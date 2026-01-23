@@ -19,10 +19,10 @@
     <div class="user_area pull-right">
       <div class="user_bx">
         <h5>Welcome</h5>
-        <p>Mr. XYZ Jonson</p>
+        <p id="UserLoginname">Mr. XYZ Jonson</p>
       </div>
       <div class="img_circle">
-        <img src="img/user-circle.png" alt="">
+        <img id="UserProfileImage"src="img/user-circle.png" alt="">
       </div>
     </div>
  </div>
@@ -55,88 +55,85 @@
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Topic</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="ContactTopic" class="form-control" placeholder="Prospect Application" disabled>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Enquiry Date</label>: 
-            <input type="date" class="form-control">
+            <input type="date" id="ContactEnquiryDate" class="form-control" disabled>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Email</label>: 
-            <input type="email" class="form-control">
+            <input type="email" id="ContactEmail" class="form-control" disabled>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">First Name</label><label class="reding">*</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactFirstName" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Middle Name</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactMiddleName" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Last Name</label><label class="reding">*</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactLastName" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Mobile Phone</label><label class="reding">*</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactMobilePhone" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Home Phone</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactHomePhone" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Best time to contact</label>: 
-            <input type="input" class="form-control">
+            <input type="text" id="ContactBestTimeToContact" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Brands Applying for</label>: 
-            <select class="form-control">
+            <select class="form-control" id="ContactbrandsSelect">
             </select>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Business Experience</label>: 
-            <select class="form-control">
+            <select class="form-control" id="ContactBusinessExperience">
               <option value="Retail">Retail</option>
               <option value="Services">Services</option>
-              <option value="QSR">QSR</option>
-              <option value="Casual dining">Casual dining</option>
-              <option value="Restaurant Ownership">Restaurant Ownership</option>
-              <option value="Other">Other</option>  
+               
             </select>
           </div>
         </div>
          <div class="col-md-4">
           <div class="form-group">
           <label for="" style="display: inline-block;">Enter Number of Units/Locations Requested</label><label style="display: inline;">:</label> 
-            <select class="form-control">
-            </select>
+             <input type="number" id="ContactLocationRequested"  class="form-control"   min="1" step="1" oninput="validatePositiveInteger(this)">  
+        
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">How did you hear about our brand?</label>: 
-            <select class="form-control">
+            <select class="form-control" id="ContactHearAboutbrand">
              <option value="Advertisement">Advertisement</option>
              <option value="News Letter">News Letter</option>
              <option value="News Paper Ads">News Paper Ads</option>
@@ -144,18 +141,7 @@
              <option value="Search Engine (Google, Bing, etc ...)">Search Engine (Google, Bing, etc ...)</option>
              <option value="Social Media (Instagram, Facebook, Linkedin, etc ...">Social Media (Instagram, Facebook, Linkedin, etc ...)</option>
              <option value="Online Ads">Online Ads</option>
-             <option value="Franchise Expo or Trade Show">Franchise Expo or Trade Show</option>
-             <option value="Business seminar / Workshop">Business seminar / Workshop</option>
-             <option value="Radio or TV Advertisement">Radio or TV Advertisement</option>
-             <option value="Billboard / Outdoor Advertising">Billboard / Outdoor Advertising</option>
-             <option value="Franchise Directory / Portal">Franchise Directory / Portal</option>
-             <option value="Industry Publication">Industry Publication</option>
-             <option value="Broker / Consultant">Broker / Consultant</option>
-             <option value="Friend or Family Recommendation">Friend or Family Recommendation</option>
-             <option value="Existing Franchisee Referral">Existing Franchisee Referral</option>
-             <option value="Business Associate / Professional Network">Business Associate / Professional Network</option>
-             <option value="Word of Mouth">Word of Mouth</option>
-             <option value="Other">Other</option>
+           
             </select> 
           </div> 
         </div>
@@ -164,7 +150,7 @@
     <div class="row">
       <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
       <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
+        <button type="button" class="btn nw_btn min_wth" onclick="submitEnquiry();">Submit</button>
       </div>
     </div>
   </div>
@@ -175,7 +161,7 @@
      <div class="col-md-4">
         <div class="form-group">
         <label for="">Gender</label>: 
-          <select class="form-control"> 
+          <select class="form-control"  id="PersonalGender"> 
             <option value="Male">Male</option>
             <option value="Female">Female</option> 
             <option value="Other">Other</option>
@@ -185,13 +171,13 @@
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Date of Birth</label>: 
-          <input type="date" class="form-control">
+          <input type="date" id="PersonalDateOfBirth" class="form-control">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Home Ownership</label>: 
-          <select class="form-control">
+          <select class="form-control" id="PersonalHomeOwnership">
             <option value="Own">Own</option>
             <option value="Renting">Renting</option>
           </select>
@@ -200,22 +186,22 @@
       <div class="col-md-4">
         <div class="form-group">
         <label for="">US Citizen</label>: 
-          <select class="form-control">
+          <select class="form-control" id="PersonalUSCitizen">
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" id="PersonalSocialSecurityDiv">
         <div class="form-group">
         <label for="">Social security</label>: 
-          <input type="text" class="form-control">
+          <input type="text" id="PersonalSocialSecurity" class="form-control">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Marital status</label>: 
-          <select class="form-control">
+          <select class="form-control" id="PersonalMaritalStatus">
             <option value="Single">Single</option>
             <option value="Married">Married</option>
             <option value="Divorced">Divorced</option>
@@ -224,42 +210,48 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" id="SpouseNameDiv">
         <div class="form-group">
         <label for="">Spouse name</label>: 
-          <input type="text" class="form-control">
+          <input type="text"id="PersonalSpouseName" class="form-control">
+          
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Spouse Birth Date</label>: 
-          <input type="date" class="form-control">
+          <input type="date" id="PersonalSpouseBirthDate" class="form-control">
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" id="SpouseUSCitizenDiv">
         <div class="form-group">
         <label for="">Spouse US Citizen</label>: 
-          <input type="text" class="form-control">
+           <select class="form-control" id="PersonalSpouseUSCitizen">
+           <option value="Yes">Yes</option>
+              <option value="No">No</option>
+          </select>
+          
+
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Spouse social security</label>: 
-          <input type="text" class="form-control">
+          <input type="text" id="PersonalSpouseSocialSecurity" class="form-control">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
         <label for="">Can you devote your full time to the business?</label>: 
-          <select name="" id="" class="form-control">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+          <select name="" id="PersonalFulltimeBusiness" class="form-control">
+           <option value="Yes">Yes</option>
+              <option value="No">No</option>
           </select>
         </div>
       </div>
         <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
         <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
+        <button type="button" class="btn nw_btn min_wth" onclick="submitPersonalDetails()">Submit</button>
         </div>
       
    </div>
@@ -271,49 +263,49 @@
       <div class="col-md-4">
           <div class="form-group">
           <label for="">Present Employer</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentPresentEmployer" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Job Title</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentJobTitle" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Employment Started Date</label>: 
-            <input type="date" class="form-control">
+            <input type="date" id="EmploymentStartedDate" class="form-control">
           </div>
         </div>
         <div class="col-md-8">
           <div class="form-group">
           <label for="">Work Address</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentWorkAddress" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Work Hours per Week</label>: 
-            <input type="number" class="form-control">
+            <input type="number" id="EmploymentWorkHoursPerWeek" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Work Phone</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentWorkPhone" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Work Phone Extension</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentWorkPhoneExtension" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">May we call you at work?</label>: 
-            <select class="form-control">
+            <select class="form-control" id="EmploymentAllowCallYouAtWork">
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
@@ -322,19 +314,19 @@
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Annual Salary ($)</label>: 
-            <input type="number" class="form-control">
+            <input type="number" id="EmploymentAnnualSalary" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Your responsibilities</label>: 
-            <input type="text" class="form-control">
+            <input type="text" id="EmploymentYourResponsibilities" class="form-control">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
           <label for="">Have you previously ever been self-employed?</label>: 
-            <select class="form-control">
+            <select class="form-control" id="EmploymentSelfEmployed">
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
@@ -342,7 +334,7 @@
         </div>
         <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
         <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
+        <button type="button" class="btn nw_btn min_wth" onclick="submitEmploymentDetails()">Submit</button>
         </div>
         
     </div>
@@ -357,73 +349,73 @@
             </a>
           </h4>
         </div>
-        <div id="co-applicant-1" class="panel-collapse collapse in">
+        <div id="co-applicant-1" class="panel-collapse collapse in co-applicant" data-seq="1">
           <div class="panel-body">
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
                   <label for="">First Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control firstName" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control middleName" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Last Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control lastName" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Role</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control role" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                   <label for="">Address</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control address" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">City</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control city" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">State</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control state" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Zip</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control zip" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Country</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control country" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Phone</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control phone" data-seq="1">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Email</label>: 
-                    <input type="email" class="form-control">
+                    <input type="email" class="form-control email" data-seq="1">
                   </div>
                 </div>
             </div>
@@ -438,73 +430,73 @@
             </a>
           </h4>
         </div>
-        <div id="co-applicant-2" class="panel-collapse collapse">
+        <div id="co-applicant-2" class="panel-collapse collapse co-applicant" data-seq="2">
           <div class="panel-body">
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
                   <label for="">First Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control firstName" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control middleName" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Last Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control lastName" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Role</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control role" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                   <label for="">Address</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control address" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">City</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control city" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">State</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control state" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Zip</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control zip" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Country</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control country" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Phone</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control phone" data-seq="2">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Email</label>: 
-                    <input type="email" class="form-control">
+                    <input type="email" class="form-control email" data-seq="2">
                   </div>
                 </div>
             </div>
@@ -519,73 +511,73 @@
             </a>
           </h4>
         </div>
-        <div id="co-applicant-3" class="panel-collapse collapse">
+        <div id="co-applicant-3" class="panel-collapse collapse co-applicant" data-seq="3">
           <div class="panel-body">
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
                   <label for="">First Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control firstName" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control middleName" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Last Name</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control lastName" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Role</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control role" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                   <label for="">Address</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control address" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">City</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control city" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">State</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control state" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Zip</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control zip" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Country</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control country" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label for="">Phone</label>: 
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control phone" data-seq="3">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                  <label for="">Email</label>: 
-                    <input type="email" class="form-control">
+                  <label for="">Email</label>
+                    <input type="email" class="form-control email" data-seq="3">
                   </div>
                 </div>
             </div>
@@ -596,7 +588,7 @@
       <div class="col-md-12">
         <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
         <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
+        <button type="button" class="btn nw_btn min_wth" onclick="submitCoApplicants();">Submit</button>
         </div>
     </div>
    </div>
@@ -1455,6 +1447,7 @@
 </div>
 
  <script src="js/commen.js"></script>  
+  <script src="js/edit_details.js"></script>   
  
 
 </body>
