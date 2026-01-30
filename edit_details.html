@@ -1,1326 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Prospect Application</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <title>Prospect Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/first_page.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>  
-  <script src="js/bootstrap.min.js"></script>  
-  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
-<div class="topsec">
+  <div class="topsec">
+    <div class="container">
+      <img src="img/logo.svg" alt="">
+      <div class="user_area pull-right">
+        <div class="user_bx">
+          <h5>Welcome</h5>
+          <p id="UserLoginname">Mr. XYZ Jonson</p>
+        </div>
+        <div class="img_circle">
+          <img id="UserProfileImage" src="img/user-circle.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
-    <img src="img/logo.svg" alt="">
-    <div class="user_area pull-right">
-      <div class="user_bx">
-        <h5>Welcome</h5>
-        <p id="UserLoginname">Mr. XYZ Jonson</p>
-      </div>
-      <div class="img_circle">
-        <img id="UserProfileImage"src="img/user-circle.png" alt="">
-      </div>
-    </div>
- </div>
-</div>
+    <a href="#" style="float:right; font-size:16px; margin:10px 0; font-weight:600; text-decoration: none;"
+      onclick="signOut()">Sign out</a>
+    <h1 class="heading_big" style="float: left;">My Application</h1>
 
-<div class="container">
-  <a href="#" style="float:right; font-size:16px; margin:10px 0; font-weight:600; text-decoration: none;" onclick="signOut()">Sign out</a>
-  <h1 class="heading_big" style="float: left;">Prospect Application</h1>
-  
- </div>
-
-<div class="container">
-  <ul class="nav nav-tabs all_tabsec">
-  <li class="active"><a data-toggle="tab" href="#tab-1">Contact Details</a></li>
-  <li><a data-toggle="tab" href="#tab-2">Personal Details</a></li>
-  <li><a data-toggle="tab" href="#tab-3">Employment</a></li>
-  <li><a data-toggle="tab" href="#tab-4">Co-Applicants</a></li>
-  <li><a data-toggle="tab" href="#tab-5">Financial</a></li>
-  <li><a data-toggle="tab" href="#tab-6">Related Questions</a></li>
-  <li><a data-toggle="tab" href="#tab-7">Other Questions</a></li>
-  <li><a data-toggle="tab" href="#tab-8">Preferred Location</a></li>
-  <li><a data-toggle="tab" href="#tab-9">Real Estate
-  </a></li>
-</ul>
-
-<div class="tab-content all_tabinside">
-  
-  <div id="tab-1" class="tab-pane fade in active">
-    <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Topic</label>: 
-            <input type="text" id="ContactTopic" class="form-control" placeholder="Prospect Application" disabled>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Enquiry Date</label>: 
-            <input type="date" id="ContactEnquiryDate" class="form-control" disabled>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Email</label>: 
-            <input type="email" id="ContactEmail" class="form-control" disabled>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">First Name</label><label class="reding">*</label>: 
-            <input type="text" id="ContactFirstName" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Middle Name</label>: 
-            <input type="text" id="ContactMiddleName" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Last Name</label><label class="reding">*</label>: 
-            <input type="text" id="ContactLastName" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Mobile Phone</label><label class="reding">*</label>: 
-            <input type="text" id="ContactMobilePhone" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Home Phone</label>: 
-            <input type="text" id="ContactHomePhone" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Best time to contact</label>: 
-            <input type="text" id="ContactBestTimeToContact" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Brands Applying for</label>: 
-            <select class="form-control" id="ContactbrandsSelect">
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Business Experience</label>: 
-            <select class="form-control" id="ContactBusinessExperience">
-              <option value="Retail">Retail</option>
-              <option value="Services">Services</option>
-               
-            </select>
-          </div>
-        </div>
-         <div class="col-md-4">
-          <div class="form-group">
-          <label for="" style="display: inline-block;">Enter Number of Units/Locations Requested</label><label style="display: inline;">:</label> 
-             <input type="number" id="ContactLocationRequested"  class="form-control"   min="1" step="1" oninput="validatePositiveInteger(this)">  
-        
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">How did you hear about our brand?</label>: 
-            <select class="form-control" id="ContactHearAboutbrand">
-             <option value="Advertisement">Advertisement</option>
-             <option value="News Letter">News Letter</option>
-             <option value="News Paper Ads">News Paper Ads</option>
-             <option value="Company Website">Company Website</option>
-             <option value="Search Engine (Google, Bing, etc ...)">Search Engine (Google, Bing, etc ...)</option>
-             <option value="Social Media (Instagram, Facebook, Linkedin, etc ...">Social Media (Instagram, Facebook, Linkedin, etc ...)</option>
-             <option value="Online Ads">Online Ads</option>
-           
-            </select> 
-          </div> 
-        </div>
-        
-    </div>
-    <div class="row">
-      <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-      <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth" onclick="submitEnquiry();">Submit</button>
-      </div>
-    </div>
-  </div>
-  <!----tab1 ed--->
-
-  <div id="tab-2" class="tab-pane fade">
-   <div class="row">
-     <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Gender</label>: 
-          <select class="form-control"  id="PersonalGender"> 
-            <option value="Male">Male</option>
-            <option value="Female">Female</option> 
-            <option value="Other">Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Date of Birth</label>: 
-          <input type="date" id="PersonalDateOfBirth" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Home Ownership</label>: 
-          <select class="form-control" id="PersonalHomeOwnership">
-            <option value="Own">Own</option>
-            <option value="Renting">Renting</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">US Citizen</label>: 
-          <select class="form-control" id="PersonalUSCitizen">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4" id="PersonalSocialSecurityDiv">
-        <div class="form-group">
-        <label for="">Social security</label>: 
-          <input type="text" id="PersonalSocialSecurity" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Marital status</label>: 
-          <select class="form-control" id="PersonalMaritalStatus">
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-            <option value="Divorced">Divorced</option>
-            <option value="Widowed">Widowed</option>
-            <option value="Separated">Separated</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4" id="SpouseNameDiv">
-        <div class="form-group">
-        <label for="">Spouse name</label>: 
-          <input type="text"id="PersonalSpouseName" class="form-control">
-          
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Spouse Birth Date</label>: 
-          <input type="date" id="PersonalSpouseBirthDate" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-4" id="SpouseUSCitizenDiv">
-        <div class="form-group">
-        <label for="">Spouse US Citizen</label>: 
-           <select class="form-control" id="PersonalSpouseUSCitizen">
-           <option value="Yes">Yes</option>
-              <option value="No">No</option>
-          </select>
-          
-
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Spouse social security</label>: 
-          <input type="text" id="PersonalSpouseSocialSecurity" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-        <label for="">Can you devote your full time to the business?</label>: 
-          <select name="" id="PersonalFulltimeBusiness" class="form-control">
-           <option value="Yes">Yes</option>
-              <option value="No">No</option>
-          </select>
-        </div>
-      </div>
-        <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth" onclick="submitPersonalDetails()">Submit</button>
-        </div>
-      
-   </div>
-  </div>
-  <!---tab2---->
-
-  <div id="tab-3" class="tab-pane fade">
-    <div class="row">
-      <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Present Employer</label>: 
-            <input type="text" id="EmploymentPresentEmployer" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Job Title</label>: 
-            <input type="text" id="EmploymentJobTitle" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Employment Started Date</label>: 
-            <input type="date" id="EmploymentStartedDate" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="form-group">
-          <label for="">Work Address</label>: 
-            <input type="text" id="EmploymentWorkAddress" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Work Hours per Week</label>: 
-            <input type="number" id="EmploymentWorkHoursPerWeek" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Work Phone</label>: 
-            <input type="text" id="EmploymentWorkPhone" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Work Phone Extension</label>: 
-            <input type="text" id="EmploymentWorkPhoneExtension" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">May we call you at work?</label>: 
-            <select class="form-control" id="EmploymentAllowCallYouAtWork">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Annual Salary ($)</label>: 
-            <input type="number" id="EmploymentAnnualSalary" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Your responsibilities</label>: 
-            <input type="text" id="EmploymentYourResponsibilities" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Have you previously ever been self-employed?</label>: 
-            <select class="form-control" id="EmploymentSelfEmployed">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-12"><p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth" onclick="submitEmploymentDetails()">Submit</button>
-        </div>
-        
-    </div>
-  </div>
-  <!---tab3---->
-  <div id="tab-4" class="tab-pane fade">
-    <div class="panel-group" id="co-applicant">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-1" aria-expanded="true" >Co-Applicant 1 <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="co-applicant-1" class="panel-collapse collapse in co-applicant" data-seq="1">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">First Name</label>: 
-                    <input type="text" class="form-control firstName" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control middleName" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Last Name</label>: 
-                    <input type="text" class="form-control lastName" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Role</label>: 
-                    <input type="text" class="form-control role" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group">
-                  <label for="">Address</label>: 
-                    <input type="text" class="form-control address" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">City</label>: 
-                    <input type="text" class="form-control city" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">State</label>: 
-                    <input type="text" class="form-control state" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Zip</label>: 
-                    <input type="text" class="form-control zip" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Country</label>: 
-                    <input type="text" class="form-control country" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Phone</label>: 
-                    <input type="text" class="form-control phone" data-seq="1">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Email</label>: 
-                    <input type="email" class="form-control email" data-seq="1">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-------Assets tab--->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-2" aria-expanded="false">Co-Applicant 2 <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="co-applicant-2" class="panel-collapse collapse co-applicant" data-seq="2">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">First Name</label>: 
-                    <input type="text" class="form-control firstName" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control middleName" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Last Name</label>: 
-                    <input type="text" class="form-control lastName" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Role</label>: 
-                    <input type="text" class="form-control role" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group">
-                  <label for="">Address</label>: 
-                    <input type="text" class="form-control address" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">City</label>: 
-                    <input type="text" class="form-control city" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">State</label>: 
-                    <input type="text" class="form-control state" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Zip</label>: 
-                    <input type="text" class="form-control zip" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Country</label>: 
-                    <input type="text" class="form-control country" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Phone</label>: 
-                    <input type="text" class="form-control phone" data-seq="2">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Email</label>: 
-                    <input type="email" class="form-control email" data-seq="2">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-------Assets tab--->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-3" aria-expanded="false">Co-Applicant 3 <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="co-applicant-3" class="panel-collapse collapse co-applicant" data-seq="3">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">First Name</label>: 
-                    <input type="text" class="form-control firstName" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Middle Name</label>: 
-                    <input type="text" class="form-control middleName" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Last Name</label>: 
-                    <input type="text" class="form-control lastName" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Role</label>: 
-                    <input type="text" class="form-control role" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group">
-                  <label for="">Address</label>: 
-                    <input type="text" class="form-control address" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">City</label>: 
-                    <input type="text" class="form-control city" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">State</label>: 
-                    <input type="text" class="form-control state" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Zip</label>: 
-                    <input type="text" class="form-control zip" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Country</label>: 
-                    <input type="text" class="form-control country" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Phone</label>: 
-                    <input type="text" class="form-control phone" data-seq="3">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Email</label>
-                    <input type="email" class="form-control email" data-seq="3">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth" onclick="submitCoApplicants();">Submit</button>
-        </div>
-    </div>
-   </div>
-  </div>
-  <div id="tab-5" class="tab-pane fade">
-    <div class="panel-group" id="financial_tab">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab1" aria-expanded="true" >Income <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="financial_tab1" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Salary ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Spouse Income ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Bonuses and Commissions($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Interest and Dividends($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Real Estate Income($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Investments ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Business Income($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Other Income ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Total Income ($)</label>: 
-                    <input type="number" class="form-control" disabled>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-------Assets tab--->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab2" aria-expanded="false">Contingent Liabilities <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="financial_tab2" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Do you have any contingent liabilities?</label>: 
-                    <select class="form-control">
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Loan Co-Signature ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Legal Judgement ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Other Special Debt ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Income Taxes ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Total Contingent Liabilities ($)</label>: 
-                    <input type="number" class="form-control" disabled>
-                  </div>
-                </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab3" aria-expanded="false">Assets <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="financial_tab3" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Cash on hand & in banks ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Marketable securities ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Real estate ($)</label>: 
-                    <input type="number" class="form-control"> 
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Accounts / Note Receivable ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Business Holdings ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Life insurance ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Retirement Saving Accounts ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Personal Property ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Other assets ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Total assets ($)</label>: 
-                    <input type="number" class="form-control" disabled>
-                  </div>
-                </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab4" aria-expanded="false">Liabilities <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="financial_tab4" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Notes Payable ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Mortgages ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Accounts Payable ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Accounts and Bill Due ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Unpaid Taxes ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Loans on life insurance ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Other liabilities ($)</label>: 
-                    <input type="number" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Total Liabilities ($)</label>: 
-                    <input type="number" class="form-control" disabled>
-                  </div>
-                </div>
-                
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="total_next">
-          <div class="row">
-            <div class="col-md-9">
-              <h1>Total Net Worth ($)</h1>
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" disabled>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
-        </div>
-    </div>
-   </div>
-  </div>
-  <!---tab5--->
-
-  <div id="tab-6" class="tab-pane fade">
-    <div class="row">
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">How would you finance your franchise?</label>: 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Will you have a partner?</label>: 
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label style="display:inline;">When would you be ready to invest in your franchise if you were approved ?</label><label style="display:inline-block;">:</label> 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label style="display:inline;">How long have you been interested in owning your own franchise ?(Months)</label><label style="display:inline-block;">:</label> 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label>Are you considering other franchise opportunities ?</label>: 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label style="display:inline;">What skills/experience do you have that will help you be successful in this business?</label><label style="display:inline-block;">:</label> 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label style="display:inline;">Who will be responsible for the daily operation of your store?
-          </label><label style="display:inline-block;">:</label> 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label>Cash available for investment</label>: 
-            <input type="number" class="form-control">
-          </div>
-        </div>
-         <div class="col-md-4">
-          <div class="form-group">
-          <label style="display:inline;">Why do you believe this franchise aligns with your personal objectives?</label><label style="display:inline-block;">:</label> 
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Have you been approved for financing?</label>: 
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-         <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Amount Approved ($)</label>: 
-            <input type="number" class="form-control">
-          </div>
-        </div>
-         <div class="col-md-4">
-          <div class="form-group">
-          <label for="">Would this business be your sole income source?</label>: 
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="" style="display:inline;">Are you now, or have you ever been party to any lawsuit - either as defendant or plaintiff?</label><label style="display:inline-block;">:</label><label class="reding" style="display:inline-block;">*</label> 
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Have you ever been convicted of a felony?</label>:
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-          <label for="" style="display:inline;">Have you ever been convicted of any offense (including misdemeanors for which you have fined $ 200 or more)?</label><label style="display:inline-block;">:</label><label class="reding" style="display:inline-block;">*</label> 
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-          <label for="">If yes, Convicted with Offense, then explain</label>:
-            <textarea class="form-control" style="resize:none; min-height: 110px;"></textarea>
-          </div>
-        </div>  
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Have you ever filed for bankruptcy?</label>:
-            <select class="form-control">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Date Bankruptcy Filed</label>:
-            <input type="date" class="form-control">
-          </div>
-        </div>
-         <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Date Bankruptcy Discharge</label>:
-            <input type="date" class="form-control">
-          </div>
-        </div>
-
-        <div class="total_next col-md-12">
-          <h1>Please list the three main questions you have about this business opportunity.</h1>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Question 1</label>:
-            <input type="type" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Question 2</label>:
-            <input type="type" class="form-control">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group pd_top">
-          <label for="">Question 3</label>:
-            <input type="type" class="form-control">
-          </div>
-        </div>
-        
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
-        </div>
-    </div>  
-  </div>
-  <!---tab6--->
-  <div id="tab-7" class="tab-pane fade">
-    <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-          <label for="">Other facts you want us to know</label>: 
-            <textarea class="form-control" style="min-height:100px; resize: none;"></textarea>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-          <label for="">Goal and Aspirations</label>: 
-            <textarea class="form-control" style="min-height:100px; resize: none;"></textarea>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-          <label for="">Other Information</label>: 
-            <textarea class="form-control" style="min-height:100px; resize: none;"></textarea>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-          <label for="">Personal / Personality Style</label>: 
-            <textarea class="form-control" style="min-height:100px; resize: none;"></textarea>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-          <label for="">Why are you applying to become a franchise during this period?</label>: 
-            <textarea class="form-control" style="min-height:100px; resize: none;"></textarea>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p>
-        </div>
-          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-          <button type="button" class="btn nw_btn min_wth">Submit</button>
-          </div>
-
-      </div>
-   </div><!---tab7 ed--->
-   <div id="tab-8" class="tab-pane fade">
-    <div class="panel-group" id="preferred_location">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#preferred_location" href="#prefer_loc1" aria-expanded="true" >Preferred Location 1 <i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="prefer_loc1" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-8">
-                  <div class="form-group">
-                  <label for="">Address</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">City</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">State / Province</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Zip</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Country</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-------Preferred2 tab--->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#preferred_location" href="#prefer_loc2" aria-expanded="false">Preferred Location 2<i class="fa fa-chevron-right"></i>
-            </a>
-          </h4>
-        </div>
-        <div id="prefer_loc2" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="row">
-               <div class="col-md-8">
-                  <div class="form-group">
-                  <label for="">Address</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">City</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">State / Province</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Zip</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                  <label for="">Country</label>: 
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p></div>
-        <div class="col-md-12" style="padding:15px 15px; text-align: center;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
-        </div>
-    </div>
-   </div>
-  </div>
-  <!---tab8--->
-
-    <div id="tab-9" class="tab-pane fade">
-    <p class="text_note" style="margin:10px 0 20px;">
-      Please provide detailed information about any real estate location(s) currently under negotiation, as well as any potential sites you are <br>considering for establishing your business:
-    </p>
-    <button class="btn nw_btn min_wth" type="button" data-toggle="modal" data-target="#add_real_estate"><i class="fa fa-plus-circle" style="margin-right:5px; font-size:18px;"></i> Add Real Estate</button>
-
-    <div class="cover_table scroll_nw">
-        <table class="table table-stripped table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th style="width:25%">Real Estate Address</th>
-              <th>Date of Purchased</th>
-              <th style="text-align: right;">Original Cost ($)</th>
-              <th style="text-align: right;">Present Value ($)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><p class="address_sec">Central Park, NY, USA</p></td>
-              <td><p class="date_se">12 Jul 2023</p></td>
-              <td><p class="amount">24422.00</p></td>
-              <td><p class="amount">24422.00</p></td>
-              <td>
-                <div class="button_act">
-                  <a href="#"><i class="fa fa-edit"></i></a>
-                  <a href="#"><i class="fa fa-trash"></i></a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
   </div>
 
-</div>
-</div>
+  <div class="container">
+    <ul class="nav nav-tabs all_tabsec">
+      <li class="active"><a data-toggle="tab" href="#tab-1">Contact Details</a></li>
+      <li><a data-toggle="tab" href="#tab-2">Personal Details</a></li>
+      <li><a data-toggle="tab" href="#tab-3">Employment</a></li>
+      <li><a data-toggle="tab" href="#tab-4">Co-Applicants</a></li>
+      <li><a data-toggle="tab" href="#tab-5">Financial</a></li>
+      <li><a data-toggle="tab" href="#tab-6">Related Questions</a></li>
+      <li><a data-toggle="tab" href="#tab-7">Other Questions</a></li>
+      <li><a data-toggle="tab" href="#tab-8">Preferred Location</a></li>
+      <li><a data-toggle="tab" href="#tab-9">Real Estate
+        </a></li>
+    </ul>
 
+    <div class="tab-content all_tabinside">
 
-<!---- add_real_estate ---->
-<div id="add_real_estate" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close close-round" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add a Real Estate</h4>
-      </div>
-      <div class="modal-body">
+      <div id="tab-1" class="tab-pane fade in active">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label>Deal Type</label>:
-              <select class="form-control">
-                <option value="Purchased">Purchased</option>
-                <option value="Leased">Leased</option>
-                <option value="Lease-to-Own">Lease-to-Own</option>
-                <option value="Joint Venture">Joint Venture</option>
-                <option value="Development">Development</option>
-                <option value="Investment">Investment</option>
-                <option value="Assignment">Assignment</option>
+              <label for="">Topic</label>:
+              <input type="text" id="ContactTopic" class="form-control" value="Prospect Application" readonly>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Enquiry Date</label>:
+              <input type="date" id="ContactEnquiryDate" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Email</label>:
+              <input type="email" id="ContactEmail" class="form-control" disabled>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">First Name</label><label class="reding">*</label>:
+              <input type="text" id="ContactFirstName" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Middle Name</label>:
+              <input type="text" id="ContactMiddleName" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Last Name</label><label class="reding">*</label>:
+              <input type="text" id="ContactLastName" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Mobile Phone</label><label class="reding">*</label>:
+              <input type="text" id="ContactMobilePhone" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Home Phone</label>:
+              <input type="text" id="ContactHomePhone" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Best time to contact</label>:
+              <input type="text" id="ContactBestTimeToContact" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Brands Applying for</label>:
+              <select class="form-control" id="ContactbrandsSelect">
               </select>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Present Value ($)</label>:
-              <input type="number" class="form-control">
+              <label for="">Business Experience</label>:
+              <select class="form-control" id="ContactBusinessExperience">
+                <option value="Retail">Retail</option>
+                <option value="Services">Services</option>
+
+              </select>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Original Cost ($)</label>:
-              <input type="number" class="form-control">
+              <label for="" style="display: inline-block;">Enter Number of Units/Locations Requested</label><label
+                style="display: inline;">:</label>
+              <input type="number" id="ContactLocationRequested" class="form-control" min="1" step="1"
+                oninput="validatePositiveInteger(this)">
+
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Address</label>:
-              <input type="text" class="form-control">
+              <label for="">How did you hear about our brand?</label>:
+              <select class="form-control" id="ContactHearAboutbrand">
+                <option value="Advertisement">Advertisement</option>
+                <option value="News Letter">News Letter</option>
+                <option value="News Paper Ads">News Paper Ads</option>
+                <option value="Company Website">Company Website</option>
+                <option value="Search Engine (Google, Bing, etc ...)">Search Engine (Google, Bing, etc ...)</option>
+                <option value="Social Media (Instagram, Facebook, Linkedin, etc ...">Social Media (Instagram, Facebook,
+                  Linkedin, etc ...)</option>
+                <option value="Online Ads">Online Ads</option>
+
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p>
+          </div>
+          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+            <button type="button" class="btn nw_btn min_wth" onclick="submitEnquiry();">Submit</button>
+          </div>
+        </div>
+      </div>
+      <!----tab1 ed--->
+
+      <div id="tab-2" class="tab-pane fade">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Gender</label>:
+              <select class="form-control" id="PersonalGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Site Street 1</label>:
-              <input type="text" class="form-control">
+              <label for="">Date of Birth</label>:
+              <input type="date" id="PersonalDateOfBirth" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Site Street 2</label>:
-              <input type="text" class="form-control">
+              <label for="">Home Ownership</label>:
+              <select class="form-control" id="PersonalHomeOwnership">
+                <option value="Own">Own</option>
+                <option value="Renting">Renting</option>
+              </select>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Site City</label>:
-              <input type="text" class="form-control">
+              <label for="">US Citizen</label>:
+              <select class="form-control" id="PersonalUSCitizen">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" id="PersonalSocialSecurityDiv">
+            <div class="form-group">
+              <label for="">Social security</label>:
+              <input type="text" id="PersonalSocialSecurity" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>State</label>:
-              <input type="text" class="form-control">
+              <label for="">Marital status</label>:
+              <select class="form-control" id="PersonalMaritalStatus">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Separated">Separated</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" id="SpouseNameDiv">
+            <div class="form-group">
+              <label for="">Spouse name</label>:
+              <input type="text" id="PersonalSpouseName" class="form-control">
+
+            </div>
+          </div>
+          <div class="col-md-4" id="SpouseBirthDateDiv">
+            <div class="form-group">
+              <label for="">Spouse Birth Date</label>:
+              <input type="date" id="PersonalSpouseBirthDate" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4" id="SpouseUSCitizenDiv">
+            <div class="form-group">
+              <label for="">Spouse US Citizen</label>:
+              <select class="form-control" id="PersonalSpouseUSCitizen">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+
+
+            </div>
+          </div>
+          <div class="col-md-4" id="PersonalSpouseSocialSecurityDiv">
+            <div class="form-group">
+              <label for="">Spouse social security</label>:
+              <input type="text" id="PersonalSpouseSocialSecurity" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Country</label>:
-              <input type="text" class="form-control">
+              <label for="">Can you devote your full time to the business?</label>:
+              <select name="" id="PersonalFulltimeBusiness" class="form-control">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p>
+          </div>
+          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+            <button type="button" class="btn nw_btn min_wth" onclick="submitPersonalDetails()">Submit</button>
+          </div>
+
+        </div>
+      </div>
+      <!---tab2---->
+
+      <div id="tab-3" class="tab-pane fade">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Present Employer</label>:
+              <input type="text" id="EmploymentPresentEmployer" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Number of Parking Spaces</label>:
-              <input type="text" class="form-control">
+              <label for="">Job Title</label>:
+              <input type="text" id="EmploymentJobTitle" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Purchase Option</label>:
-              <select class="form-control">
+              <label for="">Employment Started Date</label>:
+              <input type="date" id="EmploymentStartedDate" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="">Work Address</label>:
+              <input type="text" id="EmploymentWorkAddress" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Work Hours per Week</label>:
+              <input type="number" id="EmploymentWorkHoursPerWeek" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Work Phone</label>:
+              <input type="text" id="EmploymentWorkPhone" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Work Phone Extension</label>:
+              <input type="text" id="EmploymentWorkPhoneExtension" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">May we call you at work?</label>:
+              <select class="form-control" id="EmploymentAllowCallYouAtWork">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -1328,127 +323,1186 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Building Size (Sq.Ft.)</label>:
-              <input type="number" class="form-control">
+              <label for="">Annual Salary ($)</label>:
+              <input type="number" id="EmploymentAnnualSalary" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Building Length (X-Ft.)</label>:
-              <input type="number" class="form-control">
+              <label for="">Your responsibilities</label>:
+              <input type="text" id="EmploymentYourResponsibilities" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label>Building Width (Y-Ft.)</label>:
-              <input type="number" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Building Height (Z-Ft.)</label>:
-              <input type="number" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Letter of Intend (LOI) Sent Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Letter of Indent (LOI) Signed Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Permit Issued Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-           <div class="col-md-4">
-            <div class="form-group">
-              <label>Projected Opening Date)</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Approval Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Turnover Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Date of Purchase</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Mortgage Balance ($)</label>:
-              <input type="number" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Option Terms(Years)</label>:
-              <input type="number" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Initial Terms(Years)</label>:
-              <input type="number" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Lease Commencement Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Lease Expiration Date</label>:
-              <input type="date" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Permit Applied For</label>:
-              <input type="text" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>General Contractor Selected</label>:
-              <select class="form-control">
+              <label for="">Have you previously ever been self-employed?</label>:
+              <select class="form-control" id="EmploymentSelfEmployed">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p class="note_all">Note: all <span class="reding">*</span> marked fields are mandatory to fill</p>
+          </div>
+          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+            <button type="button" class="btn nw_btn min_wth" onclick="submitEmploymentDetails()">Submit</button>
+          </div>
+
+        </div>
+      </div>
+      <!---tab3---->
+      <div id="tab-4" class="tab-pane fade">
+        <div class="panel-group" id="co-applicant">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-1"
+                  aria-expanded="true">Co-Applicant 1 <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="co-applicant-1" class="panel-collapse collapse in co-applicant" data-seq="1">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">First Name</label>:
+                      <input type="text" class="form-control firstName" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Middle Name</label>:
+                      <input type="text" class="form-control middleName" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Last Name</label>:
+                      <input type="text" class="form-control lastName" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Role</label>:
+                      <input type="text" class="form-control role" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="">Address</label>:
+                      <input type="text" class="form-control address" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">City</label>:
+                      <input type="text" class="form-control city" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">State</label>:
+                      <input type="text" class="form-control state" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Zip</label>:
+                      <input type="text" class="form-control zip" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Country</label>:
+                      <input type="text" class="form-control country" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Phone</label>:
+                      <input type="text" class="form-control phone" data-seq="1">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Email</label>:
+                      <input type="email" class="form-control email" data-seq="1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------Assets tab--->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-2"
+                  aria-expanded="false">Co-Applicant 2 <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="co-applicant-2" class="panel-collapse collapse co-applicant" data-seq="2">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">First Name</label>:
+                      <input type="text" class="form-control firstName" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Middle Name</label>:
+                      <input type="text" class="form-control middleName" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Last Name</label>:
+                      <input type="text" class="form-control lastName" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Role</label>:
+                      <input type="text" class="form-control role" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="">Address</label>:
+                      <input type="text" class="form-control address" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">City</label>:
+                      <input type="text" class="form-control city" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">State</label>:
+                      <input type="text" class="form-control state" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Zip</label>:
+                      <input type="text" class="form-control zip" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Country</label>:
+                      <input type="text" class="form-control country" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Phone</label>:
+                      <input type="text" class="form-control phone" data-seq="2">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Email</label>:
+                      <input type="email" class="form-control email" data-seq="2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------Assets tab--->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#co-applicant" href="#co-applicant-3"
+                  aria-expanded="false">Co-Applicant 3 <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="co-applicant-3" class="panel-collapse collapse co-applicant" data-seq="3">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">First Name</label>:
+                      <input type="text" class="form-control firstName" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Middle Name</label>:
+                      <input type="text" class="form-control middleName" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Last Name</label>:
+                      <input type="text" class="form-control lastName" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Role</label>:
+                      <input type="text" class="form-control role" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="">Address</label>:
+                      <input type="text" class="form-control address" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">City</label>:
+                      <input type="text" class="form-control city" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">State</label>:
+                      <input type="text" class="form-control state" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Zip</label>:
+                      <input type="text" class="form-control zip" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Country</label>:
+                      <input type="text" class="form-control country" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Phone</label>:
+                      <input type="text" class="form-control phone" data-seq="3">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Email</label>
+                      <input type="email" class="form-control email" data-seq="3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are
+                mandatory to fill</p>
+            </div>
+            <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+              <button type="button" class="btn nw_btn min_wth" onclick="submitCoApplicants();">Submit</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer" style="text-align:center; border-top-color:transparent; padding:5px;">
-        <button type="button" class="btn nw_btn min_wth">Submit</button>
+      <div id="tab-5" class="tab-pane fade">
+        <div class="panel-group" id="financial_tab">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab1"
+                  aria-expanded="true">Income <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="financial_tab1" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Salary ($)</label>:
+                      <input type="number" id="Incomesalary" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Spouse Income ($)</label>:
+                      <input type="number" id="IncomespouseIncome" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Bonuses and Commissions($)</label>:
+                      <input type="number" id="Incomebonus" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Interest and Dividends($)</label>:
+                      <input type="number" id="Incomeinterest" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Real Estate Income($)</label>:
+                      <input type="number" id="IncomerealEstateIncome" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Investments ($)</label>:
+                      <input type="number" id="Incomeinvestments" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Business Income($)</label>:
+                      <input type="number" id="IncomebusinessIncome" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Other Income ($)</label>:
+                      <input type="number" id="IncomeotherIncome" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Total Income ($)</label>:
+                      <input type="number" id="IncometotalIncome" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------Assets tab--->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab2"
+                  aria-expanded="false">Contingent Liabilities <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="financial_tab2" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Do you have any contingent liabilities?</label>:
+                      <select class="form-control" id="ContingenthasContingent">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Loan Co-Signature ($)</label>:
+                      <input type="number" id="ContingentloanCosign" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Legal Judgement ($)</label>:
+                      <input type="number" id="ContingentlegalJudgement" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Other Special Debt ($)</label>:
+                      <input type="number" id="ContingentotherDebt" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Income Taxes ($)</label>:
+                      <input type="number" id="ContingentincomeTaxes" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Total Contingent Liabilities ($)</label>:
+                      <input type="number" id="ContingenttotalContingent" class="form-control" disabled>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab3"
+                  aria-expanded="false">Assets <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="financial_tab3" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Cash on hand & in banks ($)</label>:
+                      <input type="number" id="Assetscash" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Marketable securities ($)</label>:
+                      <input type="number" id="Assetssecurities" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Real estate ($)</label>:
+                      <input type="number" id="AssetsassetRealEstate" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Accounts / Note Receivable ($)</label>:
+                      <input type="number" id="Assetsreceivable" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Business Holdings ($)</label>:
+                      <input type="number" id="AssetsbusinessHoldings" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Life insurance ($)</label>:
+                      <input type="number" id="AssetslifeInsurance" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Retirement Saving Accounts ($)</label>:
+                      <input type="number" id="Assetsretirement" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Personal Property ($)</label>:
+                      <input type="number" id="AssetspersonalProperty" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Other assets ($)</label>:
+                      <input type="number" id="AssetsotherAssets" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Total assets ($)</label>:
+                      <input type="number" id="AssetstotalAssets" class="form-control" disabled>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#financial_tab" href="#financial_tab4"
+                  aria-expanded="false">Liabilities <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="financial_tab4" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Notes Payable ($)</label>:
+                      <input type="number" id="LiabilitiesnotesPayable" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Mortgages ($)</label>:
+                      <input type="number" id="Liabilitiesmortgages" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Accounts Payable ($)</label>:
+                      <input type="number" id="LiabilitiesaccountsPayable" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Accounts and Bill Due ($)</label>:
+                      <input type="number" id="LiabilitiesbillsDue" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Unpaid Taxes ($)</label>:
+                      <input type="number" id="LiabilitiesunpaidTaxes" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Loans on life insurance ($)</label>:
+                      <input type="number" id="LiabilitiesinsuranceLoans" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Other liabilities ($)</label>:
+                      <input type="number" id="LiabilitiesotherLiabilities" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Total Liabilities ($)</label>:
+                      <input type="number" id="LiabilitiestotalLiabilities" class="form-control" disabled>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="total_next">
+                <div class="row">
+                  <div class="col-md-9">
+                    <h1>Total Net Worth ($)</h1>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" id="netWorth" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are
+                mandatory to fill</p>
+            </div>
+            <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+              <button type="button" class="btn nw_btn min_wth" onclick="submitFinancial()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!---tab5--->
+      <div id="tab-6" class="tab-pane fade">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">How would you finance your franchise?</label>:
+              <input type="text" id="HowFinanceYourFranchise" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Will you have a partner?</label>:
+              <select class="form-control" id="HaveAPartner">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="display:inline;">When would you be ready to invest in your franchise<br> if you were
+                approved ?</label><label style="display:inline-block;">:</label>
+              <input type="text" id="WhenWillBeReadyToInvest" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="display:inline;">How long have you been interested in owning your own<br> franchise
+                ?(Months)</label><label style="display:inline-block;">:</label>
+              <input type="text" id="OtherFranchiseOpportunity" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label>Are you considering other franchise opportunities ?</label>:
+              <input type="text" id="SkillsForYourSuccess" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="display:inline;">What skills/experience do you have that will help <br>you be successful in
+                this business?</label><label style="display:inline-block;">:</label>
+              <input type="text" id="YourInterestPeriodToOwning" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label style="display:inline;">Who will be responsible for the daily operation of your store?
+              </label><label style="display:inline-block;">:</label>
+              <input type="text" id="DailyOperationResponsibility" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label>Cash available for investment</label>:
+              <input type="number" id="CashAvailableForInvestment" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="display:inline;">Why do you believe this franchise aligns with<br> your personal
+                objectives?</label><label style="display:inline-block;">:</label>
+              <input type="text" id="YourPersonalGoals" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Have you been approved for financing?</label>:
+              <select class="form-control" id="ApprovedForFinancing">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Amount Approved ($)</label>:
+              <input type="number" id="AmountApproved" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Would this business be your sole income source?</label>:
+              <select class="form-control" id="SoleIncomeSource">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="" style="display:inline;">Are you now, or have you ever been party to any lawsuit<br> - either
+                as defendant or plaintiff?</label><label style="display:inline-block;">:</label><label class="reding"
+                style="display:inline-block;">*</label>
+              <select class="form-control" id="AnyLawsuitAsDefendant">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Have you ever been convicted of a felony?</label>:
+              <select class="form-control" id="ConvictedOfAFelony">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="" style="display:inline;">Have you ever been convicted of any offense (including
+                <br>misdemeanors for which you have fined $ 200 or more)?</label><label
+                style="display:inline-block;">:</label><label class="reding" style="display:inline-block;">*</label>
+              <select class="form-control" id="ConvictedOfAnyOffence">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12" id="ConvictedOfOffenceDetailsDiv">
+            <div class="form-group">
+              <label for="">If yes, Convicted with Offense, then explain</label>:
+              <textarea class="form-control" id="ConvictedOfOffenceDetails"
+                style="resize:none; min-height: 110px;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Have you ever filed for bankruptcy?</label>:
+              <select class="form-control" id="FiledForBankruptcy">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" id="BankruptcyFiledDateDiv">
+            <div class="form-group pd_top">
+              <label for="">Date Bankruptcy Filed</label>:
+              <input type="date" id="BankruptcyFiledDate" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4" id="BankruptcyDischargeDateDiv">
+            <div class="form-group pd_top">
+              <label for="">Date Bankruptcy Discharge</label>:
+              <input type="date" id="BankruptcyDischargeDate" class="form-control">
+            </div>
+          </div>
+
+          <div class="total_next col-md-12">
+            <h1>Please list the three main questions you have about this business opportunity.</h1>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Question 1</label>:
+              <input type="text" id="BusinessOpportunityQuestion1" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Question 2</label>:
+              <input type="text" id="BusinessOpportunityQuestion2" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group pd_top">
+              <label for="">Question 3</label>:
+              <input type="text" id="BusinessOpportunityQuestion3" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are
+              mandatory to fill</p>
+          </div>
+          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+            <button type="button" class="btn nw_btn min_wth" onclick="submitBusinessOpportunity();">Submit</button>
+          </div>
+        </div>
+      </div>
+      <!---tab6--->
+      <div id="tab-7" class="tab-pane fade">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Other facts you want us to know</label>:
+              <textarea class="form-control" id="OtherFacts" style="min-height:100px; resize: none;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Goal and Aspirations</label>:
+              <textarea class="form-control" id="GoalsandAspirations"
+                style="min-height:100px; resize: none;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Other Information</label>:
+              <textarea class="form-control" id="OtherInformation" style="min-height:100px; resize: none;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Personal / Personality Style</label>:
+              <textarea class="form-control" id="PersonalPersonalityStyle"
+                style="min-height:100px; resize: none;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Why are you applying to become a franchise during this period?</label>:
+              <textarea class="form-control" id="ReasonForTimeFrameChoice"
+                style="min-height:100px; resize: none;"></textarea>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are
+              mandatory to fill</p>
+          </div>
+          <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+            <button type="button" class="btn nw_btn min_wth" onclick="submitOtherQuestion();">Submit</button>
+          </div>
+
+        </div>
+      </div><!---tab7 ed--->
+      <div id="tab-8" class="tab-pane fade">
+        <div class="panel-group" id="preferred_location">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferred_location" href="#prefer_loc1"
+                  aria-expanded="true">Preferred Location 1 <i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="prefer_loc1" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="">Address</label>:
+                      <input type="text" id="PreferredAddress1" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">City</label>:
+                      <input type="text" id="PreferredCity1" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">State / Province</label>:
+                      <input type="text" id="PreferredState1" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Zip</label>:
+                      <input type="text" id="PreferredZip1" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Country</label>:
+                      <input type="text" id="PreferredCountry1" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------Preferred2 tab--->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferred_location" href="#prefer_loc2"
+                  aria-expanded="false">Preferred Location 2<i class="fa fa-chevron-right"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="prefer_loc2" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="">Address</label>:
+                      <input type="text" id="PreferredAddress2" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="PreferredCity2">City</label>:
+                      <input type="text" id="PreferredCity2" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">State / Province</label>:
+                      <input type="text" id="PreferredState2" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Zip</label>:
+                      <input type="text" id="PreferredZip2" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">Country</label>:
+                      <input type="text" id="PreferredCountry2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <p class="note_all" style="margin-top:20px;">Note: all <span class="reding">*</span> marked fields are
+                mandatory to fill</p>
+            </div>
+            <div class="col-md-12" style="padding:15px 15px; text-align: center;">
+              <button type="button" class="btn nw_btn min_wth" onclick="submitPreferredLocation();">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---tab8--->
+
+      <div id="tab-9" class="tab-pane fade">
+        <p class="text_note" style="margin:10px 0 20px;">
+          Please provide detailed information about any real estate location(s) currently under negotiation, as well as
+          any potential sites you are <br>considering for establishing your business:
+        </p>
+        <button class="btn nw_btn min_wth" type="button" data-toggle="modal" data-target="#add_real_estate"
+          id="btnAddRealEstate"><i class="fa fa-plus-circle" style="margin-right:5px; font-size:18px;"></i> Add Real
+          Estate</button>
+
+        <div class="cover_table scroll_nw">
+          <table class="table table-stripped table-hover table-bordered" id="tblRealEstate">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th style="width:25%">Real Estate Address</th>
+                <th>Date of Purchased</th>
+                <th style="text-align: right;">Original Cost ($)</th>
+                <th style="text-align: right;">Present Value ($)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!---- add_real_estate ---->
+  <div id="add_real_estate" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close close-round" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add a Real Estate</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Deal Type</label>:
+                <select class="form-control" id="RealEstateDealType">
+                  <option value="Purchased">Purchased</option>
+                  <option value="Leased">Leased</option>
+                  <option value="Lease-to-Own">Lease-to-Own</option>
+                  <option value="Joint Venture">Joint Venture</option>
+                  <option value="Development">Development</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Assignment">Assignment</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Present Value ($)</label><label class="reding">*</label>:
+                <input type="number" id="RealEstatePresentValue" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Original Cost ($)</label> <label class="reding">*</label>:
+                <input type="number" id="RealEstateOriginalCost" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Address</label><label class="reding">*</label>:
+                <input type="text" id="RealEstateAddress" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Site Street 1</label>:
+                <input type="text" id="RealEstateSiteStreet1" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Site Street 2</label>:
+                <input type="text" id="RealEstateSiteStreet2" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Site City</label>:
+                <input type="text" id="RealEstateSiteCity" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>State</label>:
+                <input type="text" id="RealEstateState" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Country</label>:
+                <input type="text" id="RealEstateCountry" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Number of Parking Spaces</label>:
+                <input type="text" id="RealEstateParkingSpaces" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Purchase Option</label>:
+                <select class="form-control" id="RealEstatePurchaseOption">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Building Size (Sq.Ft.)</label>:
+                <input type="number" id="RealEstateBuildingSize" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Building Length (X-Ft.)</label>:
+                <input type="number" id="RealEstateBuildingLength" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Building Width (Y-Ft.)</label>:
+                <input type="number" id="RealEstateBuildingBreadth" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Building Height (Z-Ft.)</label>:
+                <input type="number" id="RealEstateBuildingHeight" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Letter of Intend (LOI) Sent Date</label>:
+                <input type="date" id="RealEstateLOISent" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Letter of Indent (LOI) Signed Date</label>:
+                <input type="date" id="RealEstateLOISigned" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Permit Issued Date</label>:
+                <input type="date" id="RealEstatePermitIssuedDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Projected Opening Date)</label>:
+                <input type="date" id="RealEstateProjectedOpeningDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Approval Date</label>:
+                <input type="date" id="RealEstateApprovalDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Turnover Date</label>:
+                <input type="date" id="RealEstateTurnoverDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Date of Purchase</label><label class="reding">*</label>:
+                <input type="date" id="RealEstatePurchasedDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Mortgage Balance ($)</label>:
+                <input type="number" id="RealEstateMortgageBalance" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Option Terms(Years)</label>:
+                <input type="number" id="RealEstateOptionTerms" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Initial Terms(Years)</label>:
+                <input type="number" id="RealEstateInitialTerms" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Lease Commencement Date</label>:
+                <input type="date" id="RealEstateLeaseComDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Lease Expiration Date</label>:
+                <input type="date" id="RealEstateLeaseExpDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Permit Applied For</label>:
+                <input type="text" id="RealEstatePermitAppliedFor" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>General Contractor Selected</label>:
+                <select class="form-control" id="RealEstateGeneralContractorSelected">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="text-align:center; border-top-color:transparent; padding:5px;">
+          <button type="button" class="btn nw_btn min_wth" onclick="submitRealEstate();">Submit</button>
+          <button type="button" class="btn   min_wth" data-dismiss="modal">Close</button>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
- <script src="js/commen.js"></script>  
-  <script src="js/edit_details.js"></script>   
- 
+
+
+  <div class="modal fade" id="shortAlert" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="padding:5px 10px;">
+          <img src="img/logo.svg" alt="" style="width:120px;">
+        </div>
+        <div class="modal-body" style="padding:30px 30px;">
+          <p id="shortAlertText">Please Enter your Email and Password.</p>
+        </div>
+        <div class="modal-footer" style="text-align:center; padding:10px;">
+          <button type="button" class="btn nw_btn min_wth" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/commen.js"></script>
+  <script src="js/edit_details.js"></script>
+
 
 </body>
+
 </html>
