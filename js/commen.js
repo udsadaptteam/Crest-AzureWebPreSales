@@ -53,14 +53,14 @@ function runing(numbr){
 });
 }
 
-nextBtns.addEventListener('click', function(){
+// nextBtns.addEventListener('click', function(){
  
-  if(current<steps.length - 1){
-    current++;
-    runing(current);
-  }
+//   if(current<steps.length - 1){
+//     current++;
+//     runing(current);
+//   }
 
-});
+// });
 
 /***sign in condition*****/
 
