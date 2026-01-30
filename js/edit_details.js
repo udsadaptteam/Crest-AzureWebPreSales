@@ -14,7 +14,24 @@ const CO_APPLICANT_GET_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3
 
 const CO_APPLICANT_POST_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/488910c988d84422b1935f966b1d42bd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=_kOOYAng0UDg8Al7mF6y6phtcK8JpgU9WRYad7sfB6M";
 
+const FINANCIAL_POST_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/5a0569a211b54107bce260beea78513a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oL71pmjLi2kmWCl4HP0jXx-uIeQZ3QIA1sU9ferdd4M";
+
+const BUSINESS_POST_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/c7d3a98654f04820a2d14d297d20b986/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6wga409fWg6ACMyc4-WcF7R_apHJDCn31xDP6yqQhts";
+
+const OTHER_QUESTION_POST_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/5520c2b73da84688aeb850d28500dd61/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=amhbzXN6lk3LL1UvBp2idlEQQvrnOCGSlYP2Q7_200o";
+
+const PREFERRED_LOCATION_POST_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/c7bdfdf03a7a4fd4a05ca5edf245c2f4/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=giDwPnKTsYQRhHVCAroXjaskp5G-e4bHtLOD6rLFrTE";
+
+const REAL_ESTATE_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/8d03c2584199494895d78704a28c4681/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jPajX-3lGCV8wAam0UTe2IhQpXxFZA1gsoTCAt0i3ok";
+
+const REAL_ESTATE_GETBYID_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/80f4813c454c4528b24734c68e89b89b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Bwym6KI9_mPVsYN8XReX_ZeAi3EWodqd4h1c9MgC0B0";
+
+const REAL_ESTATE_GETALL_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/546f2b72da524095ae6e0dd0cd6cf81e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4aoGW6OjT515BOUzOtv-aL_L46dfK3SmXyuGI3AYpps";
+
+const REAL_ESTATE_DELETE_FLOW_URL="https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/acb14d154d8e44df9d0db056b1056a4f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mgbxAZPxiVZNHmtCNIWK4SmHVa04ONEY2b0PiJW5e-o";
 var loginUserEmail = localStorage.getItem("loginEmail") || "";
+var LoginUsername = localStorage.getItem("loginUserFullName") || "";
+let realEstateId = 0;
 
 let coApplicantIdMap = {
   1: 0,
@@ -39,8 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
  
   }
     $("#ContactEmail").val(loginUserEmail);
-const today = new Date().toLocaleDateString("en-CA"); // yyyy-MM-dd
-$("#ContactEnquiryDate").val(today);
+const { FirstName, LastName } = splitFullName(LoginUsername);
+    $("#ContactFirstName").val(FirstName);
+        $("#ContactLastName").val(LastName);
+
+
+ 
+$("#ContactEnquiryDate").val(new Date().toISOString().split("T")[0]);
+
    
      
   loadBrands();
@@ -49,7 +72,12 @@ $("#ContactEnquiryDate").val(today);
   getEnquiryByEmail();
   loadPersonalDetails();
   loadEmploymentDetails();
-getCoApplicantsByEmail(loginUserEmail)
+  getCoApplicantsByEmail(loginUserEmail);
+  getFinancialData(loginUserEmail);
+  getBusinessOpportunity(loginUserEmail);
+  getOtherQuestion(loginUserEmail);
+  getPreferredLocation(loginUserEmail);
+  getAllRealEstate();
 
 
 
@@ -58,7 +86,7 @@ getCoApplicantsByEmail(loginUserEmail)
   $("#SpouseNameDiv, #SpouseUSCitizenDiv").hide();
 
   // US Citizen change
-  $("#PersonalUSCitizen").on("change", function () {
+  /* $("#PersonalUSCitizen").on("change", function () {
     if ($(this).val() === "Yes") {
       $("#PersonalSocialSecurityDiv").slideDown();
     } else {
@@ -70,14 +98,139 @@ getCoApplicantsByEmail(loginUserEmail)
   // Marital Status change
   $("#PersonalMaritalStatus").on("change", function () {
     if ($(this).val() === "Married") {
-      $("#SpouseNameDiv, #SpouseUSCitizenDiv").slideDown();
+      $("#SpouseNameDiv, #SpouseUSCitizenDiv","#SpouseBirthDateDiv","#SpousesocialsecurityDiv").slideDown();
     } else {
-      $("#SpouseNameDiv, #SpouseUSCitizenDiv").slideUp();
+      $("#SpouseNameDiv, #SpouseUSCitizenDiv","#SpouseBirthDateDiv","#SpousesocialsecurityDiv").slideUp();
       $("#PersonalSpouseName, #PersonalSpouseUSCitizen").val("");
     }
-  });
+  });*/
+
+
+toggleSpouseFields($("#PersonalMaritalStatus").val());
+  $("#PersonalMaritalStatus").on("change", function () {
+  toggleSpouseFields($(this).val());
+});
+// Personal US Citizen
+togglePersonalSSN($("#PersonalUSCitizen").val());
+
+$("#PersonalUSCitizen").on("change", function () {
+  togglePersonalSSN($(this).val());
 });
 
+// Spouse US Citizen
+$("#PersonalSpouseUSCitizen").on("change", function () {
+  toggleSpouseSSN($(this).val());
+});
+
+
+
+
+$("#ConvictedOfAnyOffence").on("change", function () {
+  toggleConviction($(this).val());
+});
+
+$("#FiledForBankruptcy").on("change", function () {
+  toggleBankruptcy($(this).val());
+});
+  // toggleConviction($("#ConvictedOfAnyOffence").val("Yes"));
+  // toggleBankruptcy($("#FiledForBankruptcy").val("Yes"));
+
+  /////Financial Section
+
+  
+$("#financial_tab1 input[type='number']").on("input", function () {
+  sumInputs("#financial_tab1", "#IncometotalIncome");
+});
+$("#financial_tab2 input[type='number']").on("input", function () {
+  sumInputs("#financial_tab2", "#ContingenttotalContingent");
+});
+
+$("#financial_tab3 input[type='number']").on("input", function () {
+  sumInputs("#financial_tab3", "#AssetstotalAssets");
+});
+
+$("#financial_tab4 input[type='number']").on("input", function () {
+  sumInputs("#financial_tab4", "#LiabilitiestotalLiabilities");
+});
+$("input[type='number']").on("input", calculateNetWorth);
+
+
+
+
+$("#btnAddRealEstate").on("click", function () {
+  addNewRealEstate();
+});
+});
+
+function splitFullName(fullName) {
+  if (!fullName) return { FirstName: "", LastName: "" };
+
+  const parts = fullName.trim().split(/\s+/);
+
+  return {
+    FirstName: parts[0] || "",
+    LastName: parts.length > 1 ? parts[parts.length - 1] : ""
+  };
+}
+
+function togglePersonalSSN(value) {
+  if (value === "Yes") {
+    $("#PersonalSocialSecurityDiv").slideDown();
+  } else {
+    $("#PersonalSocialSecurityDiv").slideUp();
+    $("#PersonalSocialSecurity").val("");
+  }
+}
+function toggleSpouseSSN(value) {
+  if (value === "Yes") {
+    $("#PersonalSpouseSocialSecurityDiv").slideDown();
+  } else {
+    $("#PersonalSpouseSocialSecurityDiv").slideUp();
+    $("#PersonalSpouseSocialSecurity").val("");
+  }
+}
+
+function toggleSpouseFields(status) {
+  if (status === "Married") {
+    $("#SpouseNameDiv, #SpouseUSCitizenDiv, #SpouseBirthDateDiv, #PersonalSpouseSocialSecurityDiv").slideDown();
+  } else {
+    $("#SpouseNameDiv, #SpouseUSCitizenDiv, #SpouseBirthDateDiv, #PersonalSpouseSocialSecurityDiv").slideUp();
+    $("#PersonalSpouseName, #PersonalSpouseUSCitizen, #PersonalSpouseBirthDate, #PersonalSpouseSocialSecurity").val("");
+  }
+}
+
+function toggleConviction(value) {
+  if (value === "Yes") {
+    $("#ConvictedOfOffenceDetailsDiv").slideDown();
+  } else {
+    $("#ConvictedOfOffenceDetailsDiv").slideUp();
+    $("#ConvictedOfOffenceDetails").val("");
+  }
+}
+function toggleBankruptcy(value) {
+  if (value === "Yes") {
+    $("#BankruptcyFiledDateDiv, #BankruptcyDischargeDateDiv").slideDown();
+  } else {
+    $("#BankruptcyFiledDateDiv, #BankruptcyDischargeDateDiv").slideUp();
+    $("#BankruptcyFiledDate, #BankruptcyDischargeDate").val("");
+  }
+}
+
+
+function addNewRealEstate() {
+  realEstateId = 0;
+
+  // reset all inputs & selects
+  $("#add_real_estate input, #add_real_estate select, #add_real_estate textarea").val("");
+
+  //   set defaults
+  $("#RealEstateDealType").val("Purchased");   // select Purchased
+  $("#RealEstateGeneralContractorSelected").val("Yes"); // last option → Yes
+  $("#RealEstatePurchaseOption").val("Yes"); // last option → Yes
+
+  // open modal
+ 
+}
 function formatDateForInput(dateStr) {
   if (!dateStr) return "";
   return dateStr.split("T")[0];
@@ -121,7 +274,9 @@ async function loadBrands() {
 
   } catch (err) {
     console.error("Brand Load Error:", err);
-    alert("Failed to load brands");
+     $("#shortAlertText").text("Failed to load brands");
+      $("#shortAlert").modal("show");
+   // alert("Failed to load brands");
   }
 }
 function bindBrands(brands) {
@@ -175,7 +330,9 @@ async function loadHearAboutBrand() {
 
   } catch (err) {
     console.error("HearAbout Load Error:", err);
-    alert("Failed to load options");
+      $("#shortAlertText").text("Failed to load options");
+      $("#shortAlert").modal("show");
+    //alert("Failed to load options");
   }
 }
 
@@ -229,7 +386,9 @@ async function loadBusinessExperience() {
 
   } catch (err) {
     console.error("BusinessExperience Load Error:", err);
-    alert("Failed to load Business Experience");
+     $("#shortAlertText").text("Failed to load Business Experience");
+      $("#shortAlert").modal("show");
+   // alert("Failed to load Business Experience");
   }
 }
 
@@ -304,12 +463,16 @@ function handleEnquiryResponse(method, data) {
   if (!data || !data.Status) return;
 
   if (data.Status === "No record found") {
-    alert("No record found");
+       $("#shortAlertText").text("No record found");
+      $("#shortAlert").modal("show");
+   // alert("No record found");
     return;
   }
 
   if (data.Status === "Successfully Submitted") {
-    alert("Data submitted successfully");
+     $("#shortAlertText").text("Data submitted successfully");
+      $("#shortAlert").modal("show");
+   // alert("Data submitted successfully");
   
     return;
   }
@@ -322,7 +485,8 @@ function handleEnquiryResponse(method, data) {
     return;
   }
 
-  alert("Something went wrong. Please try again.");
+   $("#shortAlertText").text(data.Status);
+      $("#shortAlert").modal("show");
 }
 
 /* =========================
@@ -364,14 +528,18 @@ function submitEnquiry() {
 
   // ---- First Name Validation ----
   if (!firstName) {
-    alert("First Name is required");
+    $("#shortAlertText").text("First Name is required");
+      $("#shortAlert").modal("show");
+    //alert("First Name is required");
     $("#ContactFirstName").focus();
     return;
   }
  
   // ---- Last Name Validation ----
   if (!lastName) {
-    alert("Last Name is required");
+      $("#shortAlertText").text("Last Name is required");
+      $("#shortAlert").modal("show");
+  //  alert("Last Name is required");
     $("#ContactLastName").focus();
     return;
   }
@@ -380,7 +548,9 @@ function submitEnquiry() {
 
   // ---- Mobile Validation ----
   if (!mobile) {
-    alert("Mobile number is required");
+     $("#shortAlertText").text("Mobile number is required");
+      $("#shortAlert").modal("show");
+   // alert("Mobile number is required");
     $("#ContactMobilePhone").focus();
     return;
   }
@@ -391,7 +561,7 @@ function submitEnquiry() {
     Email: loginUserEmail,
     EmailAddress: $("#ContactEmail").val(),
     Topic: $("#ContactTopic").val(),
-    EnquiryDate:  new Date($("#ContactEnquiryDate").val()), // keep as yyyy-MM-dd
+   EnquiryDate: new Date($("#ContactEnquiryDate").val()).toISOString(), // keep as yyyy-MM-dd
     FirstName: $("#ContactFirstName").val(),
     MiddleName: $("#ContactMiddleName").val(),
     LastName: $("#ContactLastName").val(),
@@ -404,7 +574,24 @@ function submitEnquiry() {
     HearAboutBrand: $("#ContactHearAboutbrand").val()
   };
 
-  
+//   const allowEmptyKeys = [
+//   "BrandsApplyingFor",
+//   "BusinessExperience",
+//   "HearAboutBrand"
+// ];
+
+// const payload = Object.fromEntries(
+//   Object.entries(rawPayload).filter(([key, value]) =>
+//     allowEmptyKeys.includes(key) ||
+//     (
+//       value !== null &&
+//       value !== undefined &&
+//       value !== "" &&
+//       !(typeof value === "number" && isNaN(value))
+//     )
+//   )
+// );
+
   const payload = Object.fromEntries(
     Object.entries(rawPayload).filter(([_, value]) =>
       value !== null &&
@@ -470,13 +657,13 @@ function submitPersonalDetails() {
   const rawPayload = {
     Email: loginUserEmail,
     Gender: $("#PersonalGender").val(),
-    DateOfBirth: new Date($("#PersonalDateOfBirth").val()), // yyyy-MM-dd
+    DateOfBirth: dateOrNull($("#PersonalDateOfBirth").val()), // yyyy-MM-dd
     HomeOwnership: $("#PersonalHomeOwnership").val(),
     USCitizen: $("#PersonalUSCitizen").val(), // Yes / No
     SocialSecurity: $("#PersonalSocialSecurity").val(),
     MaritalStatus: $("#PersonalMaritalStatus").val(),
     SpouseName: $("#PersonalSpouseName").val(),
-    SpouseBirthDate: new Date($("#PersonalSpouseBirthDate").val()), // yyyy-MM-dd
+    SpouseBirthDate: dateOrNull($("#PersonalSpouseBirthDate").val()), // yyyy-MM-dd
     SpouseUSCitizen: $("#PersonalSpouseUSCitizen").val(), // Yes / No
     SpouseSocilSecurity: $("#PersonalSpouseSocialSecurity").val(),
     FulltimeBusiness: $("#PersonalFulltimeBusiness").val() // Yes / No
@@ -509,13 +696,19 @@ function submitPersonalDetails() {
   PersonalDetailsAPI(payload, "POST")
     .then(data => {
       if (data.Status === "Successfully Submitted" || data.Status === "Success") {
-        alert("Personal details saved successfully");
+             $("#shortAlertText").text("Personal details saved successfully");
+      $("#shortAlert").modal("show");
+       // alert("Personal details saved successfully");
       } else {
-        alert(data.Status);
+          $("#shortAlertText").text(data.Status);
+      $("#shortAlert").modal("show");
+       // alert(data.Status);
       }
     })
     .catch(() => {
-      alert("Something went wrong. Please try again.");
+       $("#shortAlertText").text("Something went wrong. Please try again.");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong. Please try again.");
     });
 }
 
@@ -550,7 +743,7 @@ function bindPersonalDetails(data) {
   $("#PersonalFulltimeBusiness").val(toYesNo(data.FulltimeBusiness));
 
 
-
+  toggleSpouseFields(data.MaritalStatus);
  
 
 }
@@ -594,7 +787,7 @@ function submitEmploymentDetails() {
     Email: loginUserEmail,
     PresentEmployer: $("#EmploymentPresentEmployer").val(),
     JobTitle: $("#EmploymentJobTitle").val(),
-    EmploymentStartedDate: new Date($("#EmploymentStartedDate").val()), // yyyy-MM-dd
+    EmploymentStartedDate: dateOrNull($("#EmploymentStartedDate").val()), // yyyy-MM-dd
     WorkAddress: $("#EmploymentWorkAddress").val(),
     WorkHoursPerWeek: $("#EmploymentWorkHoursPerWeek").val(),
     WorkPhone: $("#EmploymentWorkPhone").val(),
@@ -636,13 +829,19 @@ function submitEmploymentDetails() {
   EmploymentDetailsAPI(payload, "POST")
     .then(data => {
       if (data.Status === "Successfully Submitted" || data.Status === "Success") {
-        alert("Employment details saved successfully");
+         $("#shortAlertText").text("Employment details saved successfully");
+      $("#shortAlert").modal("show");
+       // alert("Employment details saved successfully");
       } else {
-        alert(data.Status);
+         $("#shortAlertText").text(data.Status);
+      $("#shortAlert").modal("show");
+       // alert(data.Status);
       }
     })
     .catch(() => {
-      alert("Something went wrong. Please try again.");
+         $("#shortAlertText").text("Something went wrong. Please try again.");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong. Please try again.");
     });
 }
 
@@ -692,7 +891,7 @@ function toYesNo(value) {
 ///Co-Applicant Section
 
 function getCoApplicantsByEmail(email) {
-
+debugger;
   const payload = {
     Email: email
   };
@@ -720,37 +919,14 @@ function getCoApplicantsByEmail(email) {
     },
 
     error: function () {
-      alert("Something went wrong. Please try again");
+         $("#shortAlertText").text("Something went wrong. Please try again");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong. Please try again");
     }
   });
 }
 
-
-/*
-function bindCoApplicants(coApplicants) {
-
-  coApplicants.forEach(item => {
-
-    const seq = item.SequenceNo || "1";
-
-    // Store Id for later update
-    coApplicantIdMap[seq] = item.Id || 0;
-
-    // Fill UI fields by sequence
-    $(`.firstname[data-seq="${seq}"]`).val(item.FirstName || "");
-    $(`.co-middlename[data-seq="${seq}"]`).val(item.MiddleName || "");
-    $(`.co-lastname[data-seq="${seq}"]`).val(item.LastName || "");
-    $(`.co-role[data-seq="${seq}"]`).val(item.Role || "");
-    $(`.co-address[data-seq="${seq}"]`).val(item.Address || "");
-    $(`.co-city[data-seq="${seq}"]`).val(item.City || "");
-    $(`.co-state[data-seq="${seq}"]`).val(item.State || "");
-    $(`.co-zip[data-seq="${seq}"]`).val(item.Zip || "");
-    $(`.co-country[data-seq="${seq}"]`).val(item.Country || "");
-    $(`.co-phone[data-seq="${seq}"]`).val(item.Phone || "");
-    $(`.co-email[data-seq="${seq}"]`).val(item.EmailAddress || "");
-  });
-}*/
-
+ 
 function bindCoApplicants(coApplicants) {
 
   window.coApplicantIdMap = {}; // global map for update
@@ -846,14 +1022,898 @@ function submitCoApplicants() {
     success: function (res) {
       if (typeof res === "string") res = JSON.parse(res);
 
-      if (res.Status === "Success") {
-        alert("Co-applicants saved successfully");
+      if (res.Status === "Successfully Submitted") {
+         $("#shortAlertText").text("Co-applicants saved successfully");
+      $("#shortAlert").modal("show");
+        //alert("Co-applicants saved successfully");
+      }else {
+          $("#shortAlertText").text(res.Status);
+      $("#shortAlert").modal("show");
+       // alert(data.Status);
       }
     },
     error: function () {
-      alert("Something went wrong");
+       $("#shortAlertText").text("Something went wrong");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong");
     }
   });
 }
 
 
+
+
+///////Financial Section 
+
+
+function sumInputs(containerSelector, totalInputSelector) {
+  let total = 0;
+
+  $(`${containerSelector} input[type="number"]:not([disabled])`).each(function () {
+    const val = parseFloat($(this).val());
+    if (!isNaN(val)) total += val;
+  });
+
+  $(totalInputSelector).val(total);
+}
+
+function calculateNetWorth() {
+  const assets = parseFloat($("#AssetstotalAssets").val()) || 0;
+  const liabilities = parseFloat($("#LiabilitiestotalLiabilities").val()) || 0;
+  const contingent = parseFloat($("#ContingenttotalContingent").val()) || 0;
+
+  $("#netWorth").val(assets - (liabilities + contingent));
+}
+
+function cleanPayload(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v !== undefined)
+  );
+}
+
+
+function getFinancialData(loginUserEmail) {
+
+  const payload = {
+    Method: "GET",
+    Email: loginUserEmail
+  };
+
+  $.ajax({
+    url: FINANCIAL_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+       console.log(res);
+        // Convert string → object if needed
+  if (typeof res === "string") {
+    res = JSON.parse(res);
+  }
+
+      if (res.Status === "No record found") {
+        console.log("No financial data found");
+        return;
+      }
+
+      if (res.Status === "Success") {
+
+        //  Income
+        $("#Incomesalary").val(res.IncomeSalary || "");
+        $("#IncomespouseIncome").val(res.IncomeSpouse || "");
+        $("#Incomebonus").val(res.BonusesCommissions || "");
+        $("#Incomeinterest").val(res.InterestDividend || "");
+        $("#IncomerealEstateIncome").val(res.RealEstateIncome || "");
+        $("#Incomeinvestments").val(res.Investment || "");
+        $("#IncomebusinessIncome").val(res.BusinessIncome || "");
+        $("#IncomeotherIncome").val(res.OtherIncome || "");
+        $("#IncometotalIncome").val(res.TotalIncome || "");
+
+        // Contingent
+        $("#ContingenthasContingent").val(toYesNo(res.HaveContingentLiabilities));
+        $("#ContingentloanCosign").val(res.LoanCoSignature || "");
+        $("#ContingentlegalJudgement").val(res.LegalJudgement || "");
+        $("#ContingentotherDebt").val(res.OtherSpecialDebt || "");
+        $("#ContingentincomeTaxes").val(res.IncomeTaxes || "");
+        $("#ContingenttotalContingent").val(res.TotalContingentLiabilities || "");
+
+        // Assets
+        $("#Assetscash").val(res.CashInHand || "");
+        $("#Assetssecurities").val(res.MarketableSecurities || "");
+        $("#AssetsassetRealEstate").val(res.RealEstateValue || "");
+        $("#Assetsreceivable").val(res.AccountReceivable || "");
+        $("#AssetsbusinessHoldings").val(res.BusinessHoldings || "");
+        $("#AssetslifeInsurance").val(res.LifeInsurance || "");
+        $("#Assetsretirement").val(res.RetirementSavingAccount || "");
+        $("#AssetspersonalProperty").val(res.PersonalProperty || "");
+        $("#AssetsotherAssets").val(res.OtherAssets || "");
+        $("#AssetstotalAssets").val(res.TotalAssets || "");
+
+        //  Liabilities
+        $("#LiabilitiesnotesPayable").val(res.CashPayable || "");
+        $("#Liabilitiesmortgages").val(res.Mortgages || "");
+        $("#LiabilitiesaccountsPayable").val(res.AccountsPayable || "");
+        $("#LiabilitiesbillsDue").val(res.AccountsBillDue || "");
+        $("#LiabilitiesunpaidTaxes").val(res.UnpaidTaxes || "");
+        $("#LiabilitiesinsuranceLoans").val(res.LoansOnLifeInsurance || "");
+        $("#LiabilitiesotherLiabilities").val(res.OtherLiabilities || "");
+        $("#LiabilitiestotalLiabilities").val(res.TotalLiabilities || "");
+
+        //  Net Worth
+        $("#netWorth").val(res.TotalNetWorth || "");
+      }
+    },
+    error: () => alert("Something went wrong while fetching data")
+  });
+}
+
+function numOrUndefined(val) {
+  if (val === null || val === undefined || val === "") return undefined;
+
+  const n = Number(val);
+  return isNaN(n) ? undefined : n; // allows 1, 1.3, 0, etc.
+}
+ function submitFinancial() {
+
+  const payload = cleanPayload({
+  Method: "POST",
+  Email: localStorage.getItem("loginEmail"),
+
+  // Income
+  IncomeSalary: numOrUndefined($("#Incomesalary").val()),
+  IncomeSpouse: numOrUndefined($("#IncomespouseIncome").val()),
+  BonusesCommissions: numOrUndefined($("#Incomebonus").val()),
+  InterestDividend: numOrUndefined($("#Incomeinterest").val()),
+  RealEstateIncome: numOrUndefined($("#IncomerealEstateIncome").val()),
+  Investment: numOrUndefined($("#Incomeinvestments").val()),
+  BusinessIncome: numOrUndefined($("#IncomebusinessIncome").val()),
+  OtherIncome: numOrUndefined($("#IncomeotherIncome").val()),
+  TotalIncome: numOrUndefined($("#IncometotalIncome").val()),
+
+  // Contingent Liabilities
+  HaveContingentLiabilities: yesNoToBool($("#ContingenthasContingent").val()),
+  LoanCoSignature: numOrUndefined($("#ContingentloanCosign").val()),
+  LegalJudgement: numOrUndefined($("#ContingentlegalJudgement").val()),
+  OtherSpecialDebt: numOrUndefined($("#ContingentotherDebt").val()),
+  IncomeTaxes: numOrUndefined($("#ContingentincomeTaxes").val()),
+  TotalContingentLiabilities: numOrUndefined($("#ContingenttotalContingent").val()),
+
+  // Assets
+  CashInHand: numOrUndefined($("#Assetscash").val()),
+  MarketableSecurities: numOrUndefined($("#Assetssecurities").val()),
+  RealEstateValue: numOrUndefined($("#AssetsassetRealEstate").val()),
+  AccountReceivable: numOrUndefined($("#Assetsreceivable").val()),
+  BusinessHoldings: numOrUndefined($("#AssetsbusinessHoldings").val()),
+  LifeInsurance: numOrUndefined($("#AssetslifeInsurance").val()),
+  RetirementSavingAccount: numOrUndefined($("#Assetsretirement").val()),
+  PersonalProperty: numOrUndefined($("#AssetspersonalProperty").val()),
+  OtherAssets: numOrUndefined($("#AssetsotherAssets").val()),
+  TotalAssets: numOrUndefined($("#AssetstotalAssets").val()),
+
+  // Liabilities
+  CashPayable: numOrUndefined($("#LiabilitiesnotesPayable").val()),
+  Mortgages: numOrUndefined($("#Liabilitiesmortgages").val()),
+  AccountsPayable: numOrUndefined($("#LiabilitiesaccountsPayable").val()),
+  AccountsBillDue: numOrUndefined($("#LiabilitiesbillsDue").val()),
+  UnpaidTaxes: numOrUndefined($("#LiabilitiesunpaidTaxes").val()),
+  LoansOnLifeInsurance: numOrUndefined($("#LiabilitiesinsuranceLoans").val()),
+  OtherLiabilities: numOrUndefined($("#LiabilitiesotherLiabilities").val()),
+  TotalLiabilities: numOrUndefined($("#LiabilitiestotalLiabilities").val()),
+
+  // Net Worth
+  TotalNetWorth: numOrUndefined($("#netWorth").val())
+});
+
+
+ $.ajax({
+  url: FINANCIAL_POST_FLOW_URL,
+  type: "POST",
+  contentType: "application/json",
+  data: JSON.stringify(payload),
+  success: function (res) {
+
+    //  Ensure JSON
+    if (typeof res === "string") {
+      try {
+        res = JSON.parse(res);
+      } catch (e) {
+            $("#shortAlertText").text("Unexpected response from server");
+      $("#shortAlert").modal("show");
+        //alert("Unexpected response from server");
+        return;
+      }
+    }
+
+    //  Status-based alerts
+    if (res.Status === "Successfully Submitted" ) {
+          $("#shortAlertText").text("Data saved successfully");
+      $("#shortAlert").modal("show");
+     // alert("Successfully Submitted");
+    } else {
+     // alert(res.Status || "Something went wrong. Please try again");
+          $("#shortAlertText").text(res.Status || "Something went wrong. Please try again");
+      $("#shortAlert").modal("show");
+    }
+  },
+  error: function () {
+       $("#shortAlertText").text("Something went wrong. Please try again");
+      $("#shortAlert").modal("show")
+   // alert("Something went wrong. Please try again");
+  }
+});
+
+}
+
+
+
+////// RELATED QUESTION SECTION
+
+
+function numOrUndefinedQUESTION(val) {
+  if (val === "" || val === null || val === undefined) return undefined;
+  const n = Number(val);
+  return isNaN(n) ? undefined : n;
+}
+
+function cleanPayloadQUESTION(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v !== undefined && v !== "")
+  );
+}
+
+
+function submitBusinessOpportunity() {
+
+  const payload = cleanPayloadQUESTION({
+    Method: "POST",
+    Email: localStorage.getItem("loginEmail"),
+
+    HowFinanceYourFranchise: $("#HowFinanceYourFranchise").val(),
+    HaveAPartner: yesNoToBool($("#HaveAPartner").val()),
+    WhenWillBeReadyToInvest: $("#WhenWillBeReadyToInvest").val(),
+    OtherFranchiseOpportunity: $("#OtherFranchiseOpportunity").val(),
+    SkillsForYourSuccess: $("#SkillsForYourSuccess").val(),
+    YourInterestPeriodToOwning: $("#YourInterestPeriodToOwning").val(),
+    DailyOperationResponsibility: $("#DailyOperationResponsibility").val(),
+
+    CashAvailableForInvestment: numOrUndefinedQUESTION($("#CashAvailableForInvestment").val()),
+    YourPersonalGoals: $("#YourPersonalGoals").val(),
+
+    ApprovedForFinancing: yesNoToBool($("#ApprovedForFinancing").val()),
+    AmountApproved: numOrUndefinedQUESTION($("#AmountApproved").val()),
+
+    SoleIncomeSource: yesNoToBool($("#SoleIncomeSource").val()),
+    AnyLawsuitAsDefendant: yesNoToBool($("#AnyLawsuitAsDefendant").val()),
+    ConvictedOfAFelony: yesNoToBool($("#ConvictedOfAFelony").val()),
+    ConvictedOfAnyOffence: yesNoToBool($("#ConvictedOfAnyOffence").val()),
+    ConvictedOfOffenceDetails: $("#ConvictedOfOffenceDetails").val(),
+
+    FiledForBankruptcy: yesNoToBool($("#FiledForBankruptcy").val()),
+    BankruptcyFiledDate: dateOrNull($("#BankruptcyFiledDate").val()),
+    BankruptcyDischargeDate: dateOrNull($("#BankruptcyDischargeDate").val()),
+
+    BusinessOpportunityQuestion1: $("#BusinessOpportunityQuestion1").val(),
+    BusinessOpportunityQuestion2: $("#BusinessOpportunityQuestion2").val(),
+    BusinessOpportunityQuestion3: $("#BusinessOpportunityQuestion3").val()
+  });
+
+  $.ajax({
+    url: BUSINESS_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+      if (typeof res === "string") res = JSON.parse(res);
+
+      if (res.Status === "Successfully Submitted") {
+          $("#shortAlertText").text("Data saved successfully");
+      $("#shortAlert").modal("show");
+        //alert("Successfully Submitted");
+      } else {
+         $("#shortAlertText").text(res.Status || "Something went wrong");
+         $("#shortAlert").modal("show");
+       // alert(res.Status || "Something went wrong");
+      }
+    },
+    error: function () {
+       $("#shortAlertText").text("Something went wrong. Please try again");
+         $("#shortAlert").modal("show");
+     // alert("Something went wrong. Please try again");
+    }
+  });
+}
+
+// function yesNoToBool(val) {
+//   return val === "Yes";
+// }
+function yesNoToBool(val) {
+  if (!val) return false;
+
+  const v = val.toString().trim().toLowerCase();
+  if (v === "yes") return true;
+  if (v === "no") return false;
+
+  console.warn("Unexpected Yes/No value:", val);
+  return false;
+}
+
+
+function dateOrNull(val) {
+  return val ? new Date(val) : "";
+}
+
+
+function getBusinessOpportunity(email) {
+  debugger;
+const payload = {
+    Method: "GET",
+    Email: email
+  };
+
+  $.ajax({
+    url: BUSINESS_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+ 
+ 
+
+      // Ensure JSON
+      if (typeof res === "string") {
+        try {
+          res = JSON.parse(res);
+        } catch {
+          console.error("Invalid JSON response", res);
+          return;
+        }
+      }
+
+      if (res.Status === "No record found") {
+        console.log("No business opportunity data found");
+        return;
+      }
+
+      // Bind data
+      if (res.Status === "Success") {
+      $("#HowFinanceYourFranchise").val(res.HowFinanceYourFranchise || "");
+      $("#HaveAPartner").val(toYesNo(res.HaveAPartner));
+      $("#WhenWillBeReadyToInvest").val(res.WhenWillBeReadyToInvest || "");
+      $("#OtherFranchiseOpportunity").val(res.OtherFranchiseOpportunity || "");
+      $("#SkillsForYourSuccess").val(res.SkillsForYourSuccess || "");
+      $("#YourInterestPeriodToOwning").val(res.YourInterestPeriodToOwning || "");
+      $("#DailyOperationResponsibility").val(res.DailyOperationResponsibility || "");
+      $("#CashAvailableForInvestment").val(res.CashAvailableForInvestment || "");
+      $("#YourPersonalGoals").val(res.YourPersonalGoals || "");
+      $("#ApprovedForFinancing").val(toYesNo(res.ApprovedForFinancing));
+      $("#AmountApproved").val(res.AmountApproved || "");
+      $("#SoleIncomeSource").val(toYesNo(res.SoleIncomeSource));
+      $("#AnyLawsuitAsDefendant").val(toYesNo(res.AnyLawsuitAsDefendant));
+      $("#ConvictedOfAFelony").val(toYesNo(res.ConvictedOfAFelony));
+      $("#ConvictedOfAnyOffence").val(toYesNo(res.ConvictedOfAnyOffence));
+      $("#ConvictedOfOffenceDetails").val(toYesNo(res.ConvictedOfOffenceDetails));
+      $("#FiledForBankruptcy").val(toYesNo(res.FiledForBankruptcy));
+      $("#BankruptcyFiledDate").val(res.BankruptcyFiledDate || "");
+      $("#BankruptcyDischargeDate").val(res.BankruptcyDischargeDate || "");
+      $("#BusinessOpportunityQuestion1").val(res.BusinessOpportunityQuestion1 || "");
+      $("#BusinessOpportunityQuestion2").val(res.BusinessOpportunityQuestion2 || "");
+      $("#BusinessOpportunityQuestion3").val(res.BusinessOpportunityQuestion3 || "");
+      toggleConviction(toYesNo(res.ConvictedOfAnyOffence));
+      toggleBankruptcy(toYesNo(res.FiledForBankruptcy));
+      }
+    },
+    error: function () {
+          $("#shortAlertText").text("Something went wrong while fetching business opportunity data");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong while fetching business opportunity data");
+    }
+  });
+}
+
+
+
+
+////Other Question Section
+
+
+function submitOtherQuestion() {
+
+  const payload = cleanPayloadQUESTION({
+    Method: "POST",
+    Email: localStorage.getItem("loginEmail"),
+
+    OtherFacts: $("#OtherFacts").val(),
+    GoalsandAspirations: $("#GoalsandAspirations").val(),
+    OtherInformation: $("#OtherInformation").val(),
+    PersonalPersonalityStyle: $("#PersonalPersonalityStyle").val(),
+    ReasonForTimeFrameChoice: $("#ReasonForTimeFrameChoice").val()
+  });
+
+  $.ajax({
+    url: OTHER_QUESTION_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+      if (typeof res === "string") res = JSON.parse(res);
+
+      if (res.Status === "Successfully Submitted") {
+         $("#shortAlertText").text("Data saved successfully");
+      $("#shortAlert").modal("show");
+       // alert("Successfully Submitted");
+      } else {
+        $("#shortAlertText").text(res.Status || "Something went wrong");
+      $("#shortAlert").modal("show");
+        //alert(res.Status || "Something went wrong");
+      }
+    },
+    error: function () {
+       $("#shortAlertText").text("Something went wrong. Please try again");
+      $("#shortAlert").modal("show");
+      //alert("Something went wrong. Please try again");
+    }
+  });
+}
+
+
+
+
+function getOtherQuestion(email) {
+const payload = {
+    Method: "GET",
+    Email: email
+  };
+
+  $.ajax({
+    url: OTHER_QUESTION_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+ 
+ 
+
+      // Ensure JSON
+      if (typeof res === "string") {
+        try {
+          res = JSON.parse(res);
+        } catch {
+          console.error("Invalid JSON response", res);
+          return;
+        }
+      }
+
+      if (res.Status === "No record found") {
+        console.log("No business opportunity data found");
+        return;
+      }
+if (res.Status === "Success") {
+     $("#OtherFacts").val(res.OtherFacts || "");
+      $("#GoalsandAspirations").val(res.GoalsandAspirations || "");
+      $("#OtherInformation").val(res.OtherInformation || "");
+      $("#PersonalPersonalityStyle").val(res.PersonalPersonalityStyle || "");
+      $("#ReasonForTimeFrameChoice").val(res.ReasonForTimeFrameChoice || "");
+}
+    },
+    error: function () {
+         $("#shortAlertText").text("Something went wrong while fetching business opportunity data");
+      $("#shortAlert").modal("show");
+      // alert("Something went wrong while fetching business opportunity data");
+    }
+  });
+}
+
+
+
+
+////////////////Preffered Location Section
+
+function submitPreferredLocation() {
+
+  const payload = cleanPayloadQUESTION({
+    Method: "POST",
+    Email: localStorage.getItem("loginEmail"),
+
+    PreferredAddress1: $("#PreferredAddress1").val(),
+    PreferredCity1: $("#PreferredCity1").val(),
+    PreferredState1: $("#PreferredState1").val(),
+    PreferredZip1: $("#PreferredZip1").val(),
+    PreferredCountry1: $("#PreferredCountry1").val(),
+
+    PreferredAddress2: $("#PreferredAddress2").val(),
+    PreferredCity2: $("#PreferredCity2").val(),
+    PreferredState2: $("#PreferredState2").val(),
+    PreferredZip2: $("#PreferredZip2").val(),
+    PreferredCountry2: $("#PreferredCountry2").val()
+  });
+
+  $.ajax({
+    url: PREFERRED_LOCATION_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+      if (typeof res === "string") res = JSON.parse(res);
+
+      if (res.Status === "Successfully Submitted") {
+          $("#shortAlertText").text("Data saved successfully");
+      $("#shortAlert").modal("show");
+        //alert("Successfully Submitted");
+      } else {
+               $("#shortAlertText").text(res.Status || "Something went wrong");
+      $("#shortAlert").modal("show");
+        //alert(res.Status || "Something went wrong");
+      }
+    },
+    error: function () {
+          $("#shortAlertText").text("Something went wrong. Please try again");
+      $("#shortAlert").modal("show");
+     // alert("Something went wrong. Please try again");
+    }
+  });
+}
+
+
+
+function getPreferredLocation(email) {
+const payload = {
+    Method: "GET",
+    Email: email
+  };
+
+  $.ajax({
+    url: PREFERRED_LOCATION_POST_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+ 
+
+      if (typeof res === "string") res = JSON.parse(res);
+      if (res.Status === "No record found") return;
+
+      if (res.Status === "Success") {
+
+      $("#PreferredAddress1").val(res.PreferredAddress1 || "");
+      $("#PreferredCity1").val(res.PreferredCity1 || "");
+      $("#PreferredState1").val(res.PreferredState1 || "");
+      $("#PreferredZip1").val(res.PreferredZip1 || "");
+      $("#PreferredCountry1").val(res.PreferredCountry1 || "");
+
+      $("#PreferredAddress2").val(res.PreferredAddress2 || "");
+      $("#PreferredCity2").val(res.PreferredCity2 || "");
+      $("#PreferredState2").val(res.PreferredState2 || "");
+      $("#PreferredZip2").val(res.PreferredZip2 || "");
+      $("#PreferredCountry2").val(res.PreferredCountry2 || "");
+      }
+    },
+    error: function () {
+      console.log("Failed to fetch preferred location data");
+    }
+  });
+}
+
+
+
+
+///////REAL STATE SECTION
+
+
+function RealnumOrUndefined(val) {
+  if (val === "" || val === null || isNaN(val)) return undefined;
+  return Number(val);
+}
+
+function RealstrOrUndefined(val) {
+  return val && val.trim() !== "" ? val.trim() : undefined;
+}
+
+function RealdateOrUndefined(val) {
+  if (!val) return undefined;
+  const d = new Date(val);
+  return isNaN(d.getTime()) ? undefined : d.toISOString();
+}
+
+function validateRequired(fields) {
+  for (let f of fields) {
+    if (!f.value || f.value.trim() === "") {
+        $("#shortAlertText").text(`Please enter ${f.name}`);
+      $("#shortAlert").modal("show");
+     // alert(`Please enter ${f.name}`);
+      f.el.focus();
+      return false;
+    }
+  }
+  return true;
+}
+
+function validateRealEstateForm() {
+  return validateRequired([
+    { name: "Deal Type", value: $("#RealEstateDealType").val(), el: $("#RealEstateDealType") },
+    { name: "PresentValue", value: $("#RealEstatePresentValue").val(), el: $("#RealEstatePresentValue") },
+    { name: "OriginalCost", value: $("#RealEstateOriginalCost").val(), el: $("#RealEstateOriginalCost") },
+    { name: "Address", value: $("#RealEstateAddress").val(), el: $("#RealEstateAddress") },
+    { name: "PurchasedDate", value: $("#RealEstatePurchasedDate").val(), el: $("#RealEstatePurchasedDate") }
+  ]);
+}
+function submitRealEstate() {
+
+  if (!validateRealEstateForm()) return;
+
+  const payload = {
+    Method: "POST", // Same for Add & Update
+    Email: localStorage.getItem("loginEmail"),
+    Id: realEstateId || 0,
+
+    DealType: RealstrOrUndefined($("#RealEstateDealType").val()),
+    PresentValue: RealnumOrUndefined($("#RealEstatePresentValue").val()),
+    OriginalCost: RealnumOrUndefined($("#RealEstateOriginalCost").val()),
+
+    RealEstateAddress: RealstrOrUndefined($("#RealEstateAddress").val()),
+    SiteStreet1: RealstrOrUndefined($("#RealEstateSiteStreet1").val()),
+    SiteStreet2: RealstrOrUndefined($("#RealEstateSiteStreet2").val()),
+    SiteCity: RealstrOrUndefined($("#RealEstateSiteCity").val()),
+    State: RealstrOrUndefined($("#RealEstateState").val()),
+    Country: RealstrOrUndefined($("#RealEstateCountry").val()),
+
+    ParkingSpaces: RealstrOrUndefined($("#RealEstateParkingSpaces").val()),
+    PurchaseOption: RealstrOrUndefined($("#RealEstatePurchaseOption").val()),
+
+    BuildingSize: RealstrOrUndefined($("#RealEstateBuildingSize").val()),
+    BuildingLength: RealstrOrUndefined($("#RealEstateBuildingLength").val()),
+    BuildingBreadth: RealstrOrUndefined($("#RealEstateBuildingBreadth").val()),
+    BuildingHeight: RealstrOrUndefined($("#RealEstateBuildingHeight").val()),
+
+    LOISent: RealdateOrUndefined($("#RealEstateLOISent").val()),
+    LOISigned: RealdateOrUndefined($("#RealEstateLOISigned").val()),
+    PermitIssuedDate: RealdateOrUndefined($("#RealEstatePermitIssuedDate").val()),
+    ProjectedOpeningDate: RealdateOrUndefined($("#RealEstateProjectedOpeningDate").val()),
+    ApprovalDate: RealdateOrUndefined($("#RealEstateApprovalDate").val()),
+    TurnoverDate: RealdateOrUndefined($("#RealEstateTurnoverDate").val()),
+    PurchasedDate: RealdateOrUndefined($("#RealEstatePurchasedDate").val()),
+
+    MortgageBalance: RealnumOrUndefined($("#RealEstateMortgageBalance").val()),
+    OptionTerms: RealstrOrUndefined($("#RealEstateOptionTerms").val()),
+    InitialTerms: RealstrOrUndefined($("#RealEstateInitialTerms").val()),
+
+    LeaseComDate: RealdateOrUndefined($("#RealEstateLeaseComDate").val()),
+    LeaseExpDate: RealdateOrUndefined($("#RealEstateLeaseExpDate").val()),
+
+    PermitAppliedFor: RealstrOrUndefined($("#RealEstatePermitAppliedFor").val()),
+    GeneralContractorSelected: RealstrOrUndefined($("#RealEstateGeneralContractorSelected").val())
+  };
+
+  $.ajax({
+    url: REAL_ESTATE_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+
+      if (typeof res === "string") res = JSON.parse(res);
+
+      if (res.Status === "Successfully Submitted" ||
+          res.Status === "Successfully Updated") {
+            $("#shortAlertText").text("Data saved successfully");
+      $("#shortAlert").modal("show");
+
+       // alert(res.Status);
+        $("#add_real_estate").modal("hide");
+        realEstateId = 0; // reset
+
+        getAllRealEstate(); //  refresh table
+      } else {
+        $("#shortAlertText").text(res.Status || "Something went wrong");
+      $("#shortAlert").modal("show");
+      //  alert(res.Status || "Something went wrong");
+      }
+    },
+    error: function () {
+       $("#shortAlertText").text("Something went wrong. Please try again");
+      $("#shortAlert").modal("show");
+    //  alert("Something went wrong. Please try again");
+    }
+  });
+}
+
+
+
+function getAllRealEstate() {
+const payload = {
+    
+    Email: localStorage.getItem("loginEmail"),
+    
+  };
+
+  $.ajax({
+    url: REAL_ESTATE_GETALL_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+  
+
+      if (typeof res === "string") res = JSON.parse(res);
+      console.log(res);
+
+      if (!res || res.length === 0 || res.Status==="No record found") {
+        $("#tblRealEstate tbody").html(
+          `<tr><td colspan="6" class="text-center">No records found</td></tr>`
+        );
+        return;
+      }
+      if(res.Status==="Success"){
+      
+         bindRealEstateTable(res.RealEstate);
+    
+      }
+      else{
+          $("#tblRealEstate tbody").html(
+          `<tr><td colspan="6" class="text-center">No records found</td></tr>`
+        );
+        return;
+      }
+    },
+    error: function () {
+         $("#shortAlertText").text("Failed to fetch real estate records");
+      $("#shortAlert").modal("show");
+     // alert("Failed to fetch real estate records");
+    }
+  });
+}
+function bindRealEstateTable(data) {
+
+  let html = "";
+
+  data.forEach((item, index) => {
+
+    html += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>
+          <p class="address_sec">${item.RealEstateAddress || "-"}</p>
+        </td>
+        <td>
+          <p class="date_se">${item.PurchasedDate ? formatDate(item.PurchasedDate) : "-"}</p>
+        </td>
+        <td style="text-align:right">
+          <p class="amount">${item.OriginalCost ? formatAmount(item.OriginalCost) : "-"}</p>
+        </td>
+        <td style="text-align:right">
+          <p class="amount">${item.PresentValue ? formatAmount(item.PresentValue) : "-"}</p>
+        </td>
+        <td>
+          <div class="button_act">
+            <a href="javascript:void(0)" onclick="editRealEstate(${item.Id})">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="javascript:void(0)" onclick="deleteRealEstate(${item.Id})">
+              <i class="fa fa-trash"></i>
+            </a>
+          </div>
+        </td>
+      </tr>`;
+  });
+
+  $("#tblRealEstate tbody").html(html);
+}
+
+function formatAmount(val) {
+  if (val === null || val === undefined) return "0.00";
+  return Number(val).toFixed(2);
+}
+function formatDate(dateVal) {
+  if (!dateVal) return "-";
+  const d = new Date(dateVal);
+  return d.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+ 
+
+
+function deleteRealEstate(id) {
+
+  if (!confirm("Are you sure you want to delete this record?")) return;
+
+  const payload = {
+    
+    Email: localStorage.getItem("loginEmail"),
+    Id: id
+  };
+
+  $.ajax({
+    url: REAL_ESTATE_DELETE_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+
+      if (typeof res === "string") res = JSON.parse(res);
+ $("#shortAlertText").text(res.Status || "Deleted successfully");
+      $("#shortAlert").modal("show");
+      //alert(res.Status || "Deleted successfully");
+
+      // Refresh table
+      getAllRealEstate();
+    },
+    error: function () {
+      $("#shortAlertText").text("Delete failed");
+      $("#shortAlert").modal("show");
+      //alert("Delete failed");
+    }
+  });
+}
+
+
+function editRealEstate(id) {
+  realEstateId = id; //  THIS is what enables update
+
+
+   const payload = {
+    
+    Email: localStorage.getItem("loginEmail"),
+    Id: id
+  };
+
+  $.ajax({
+    url: REAL_ESTATE_GETBYID_FLOW_URL,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    success: function (res) {
+   
+
+      if (typeof res === "string") res = JSON.parse(res);
+      if (!res) return;
+
+      $("#RealEstateDealType").val(res.DealType);
+      $("#RealEstatePresentValue").val(res.PresentValue);
+      $("#RealEstateOriginalCost").val(res.OriginalCost);
+
+      $("#RealEstateAddress").val(res.RealEstateAddress);
+      $("#RealEstateSiteStreet1").val(res.SiteStreet1);
+      $("#RealEstateSiteStreet2").val(res.SiteStreet2);
+      $("#RealEstateSiteCity").val(res.SiteCity);
+      $("#RealEstateState").val(res.State);
+      $("#RealEstateCountry").val(res.Country);
+
+      $("#RealEstateParkingSpaces").val(res.ParkingSpaces);
+      $("#RealEstatePurchaseOption").val(res.PurchaseOption);
+
+      $("#RealEstateBuildingSize").val(res.BuildingSize);
+      $("#RealEstateBuildingLength").val(res.BuildingLength);
+      $("#RealEstateBuildingBreadth").val(res.BuildingBreadth);
+      $("#RealEstateBuildingHeight").val(res.BuildingHeight);
+
+      setDate("#RealEstateLOISent", res.LOISent);
+      setDate("#RealEstateLOISigned", res.LOISigned);
+      setDate("#RealEstatePermitIssuedDate", res.PermitIssuedDate);
+      setDate("#RealEstateProjectedOpeningDate", res.ProjectedOpeningDate);
+      setDate("#RealEstateApprovalDate", res.ApprovalDate);
+      setDate("#RealEstateTurnoverDate", res.TurnoverDate);
+      setDate("#RealEstatePurchasedDate", res.PurchasedDate);
+
+      $("#RealEstateMortgageBalance").val(res.MortgageBalance);
+      $("#RealEstateOptionTerms").val(res.OptionTerms);
+      $("#RealEstateInitialTerms").val(res.InitialTerms);
+
+      setDate("#RealEstateLeaseComDate", res.LeaseComDate);
+      setDate("#RealEstateLeaseExpDate", res.LeaseExpDate);
+
+      $("#RealEstatePermitAppliedFor").val(res.PermitAppliedFor);
+      $("#RealEstateGeneralContractorSelected").val(res.GeneralContractorSelected);
+
+      $("#add_real_estate").modal("show");
+    }
+  });
+}
+
+ 
+
+function setDate(selector, value) {
+  $(selector).val(value ? value.split("T")[0] : "");
+}
