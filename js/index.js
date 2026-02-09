@@ -12,6 +12,11 @@ const SEND_CODE_FLOW_URL = "https://defaultad358c3362364cda92e747b5c2b8c1.3e.env
 const VALIDATE_CODE_FLOW_URL = "https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/57da794a0d634c889e3f82ee9ec3c171/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ohQatYVuuDJcXIfwtGCzvanVxgCHl6O1OKwYO0S1tYk";
 
 const RESET_PASSWORD_FLOW_URL = "https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ed0df114859749bbbc7c1339e6f13554/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CdC27HNUEsKHbix1jzvAR_SOG3eay5DdQDMPDEkFmRk";
+const StateApiUrl = "https://defaultad358c3362364cda92e747b5c2b8c1.3e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/0929346124984194ae1fa0ef537cf93a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dPykLyOqS7G3_ndMVht9d9Sa6Lt0KisKgV0bftQuTuE";
+
+
+let otpTimerInterval = null;
+let otpRemainingTime = 120; // 2 minutes
 /* =========================
    SIGN IN CLICK
 ========================= */
@@ -383,6 +388,7 @@ function handleSendCodeResponse(status, btn) {
       $("#shortAlertText").text("Verification code has been sent to your email.");
       $("#shortAlert").modal("show");
       verify_cod(btn);  
+      startOtpTimer();
       break;
 
     case "Unable to send email. Please try again later or contact support":
@@ -486,7 +492,9 @@ function handleValidateCodeResponse(status, btn) {
       btn.style.display = "none";
       entrCode.setAttribute("disabled", true);
       password_area.style.display = "block";
+      $("#otpSection").hide();
         verify_cod(btn);  
+          
       break;
 
     case "Invalid verification code. Please try again":
@@ -760,31 +768,66 @@ function bindProfileData(data) {
   // ---- Address ----
   document.getElementById("Updateaddress").value = data.Address || "";
   document.getElementById("Updatecity").value = data.City || "";
-  document.getElementById("Updatestate").value = data.State || "";
-  document.getElementById("UpdatezipCode").value = data.ZipCode || "";
+ // document.getElementById("Updatestate").value = data.State || "";
+ // ---------- Set Zip ----------
+document.getElementById("UpdatezipCode").value = data.ZipCode || "";
 
-// ---- Country ----
-  const countrySelect = document.getElementById("Updatecountry");
-  let isFound = false;
+// ---------- Country ----------
+const countrySelect = document.getElementById("Updatecountry");
+let isFound = false;
 
-  Array.from(countrySelect.options).forEach(opt => {
-    if (
-      opt.value == data.Country ||
-      opt.text.toLowerCase() === String(data.Country).toLowerCase()
-    ) {
+Array.from(countrySelect.options).forEach(opt => {
+  if (
+    opt.value == data.Country ||
+    opt.text.toLowerCase() === String(data.Country).toLowerCase()
+  ) {
+    opt.selected = true;
+    isFound = true;
+  }
+});
+
+// If country not present, add it
+if (data.Country && !isFound) {
+  const opt = document.createElement("option");
+  opt.value = data.Country;
+  opt.text = data.Country;
+  opt.selected = true;
+  countrySelect.appendChild(opt);
+}
+
+// ---------- STATE TOGGLE ----------
+const isUSA = data.Country && data.Country.toLowerCase() === "usa";
+
+if (isUSA) {
+  // Show dropdown, hide textbox
+  $("#Updatestateopt").show();
+  $("#Updatestate").hide().val("");
+
+  // Select state in dropdown
+  const stateDropdown = document.getElementById("Updatestateopt");
+  let stateFound = false;
+
+  Array.from(stateDropdown.options).forEach(opt => {
+    if (opt.value === data.State || opt.text === data.State) {
       opt.selected = true;
-      isFound = true;
+      stateFound = true;
     }
   });
 
-  // If country not present in dropdown, add it
-  if (data.Country && !isFound) {
+  // If state not present, add it
+  if (data.State && !stateFound) {
     const opt = document.createElement("option");
-    opt.value = data.Country;
-    opt.text = data.Country;
+    opt.value = data.State;
+    opt.text = data.State;
     opt.selected = true;
-    countrySelect.appendChild(opt);
+    stateDropdown.appendChild(opt);
   }
+
+} else {
+  // Show textbox, hide dropdown
+  $("#Updatestateopt").hide().val("");
+  $("#Updatestate").show().val(data.State || "");
+}
 
   // ---- Profile Image ----
   if (data.ImageBase64) {
@@ -833,7 +876,13 @@ $("#UpdateprofileImageInput").on("change", function () {
 
 
 async function updateProfile() {
+const selectedCountry = $("#Updatecountry option:selected").text().trim();
+const isUSA = selectedCountry.toLowerCase() === "usa";
 
+// Get state from correct control
+const stateValue = isUSA
+  ? $("#Updatestateopt").val()     // dropdown for USA
+  : $("#Updatestate").val();      // textbox for others
   const payload = {
     Email: localStorage.getItem("loginEmail"),
     FirstName: $("#UpdatefirstName").val(),
@@ -844,10 +893,10 @@ async function updateProfile() {
     Designation: $("#Updatedesignation").val(),
     Address: $("#Updateaddress").val(),
     City: $("#Updatecity").val(),
-    State: $("#Updatestate").val(),
+     State: stateValue || "",
     ZipCode: $("#UpdatezipCode").val(),
    // Country: $("#Updatecountry").val(),
-        Country: $("#Updatecountry option:selected").text()
+        Country: selectedCountry
 
    // FileName: "profile.png",
     
@@ -1084,10 +1133,37 @@ function handleStatus(status,btn) {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadCountries();
+  loadState();
+  $("#Updatecountry").on("change", function () {
+  toggleUpdateStateByCountry($(this).val());
+});
+$("#countrySelect").on("change", function () {
+  toggleUpdateCountry($(this).val());
+});
+
 });
 
 
 // Load Countries data
+function toggleUpdateStateByCountry(country) {
+  if (country && country.toLowerCase() === "usa") {
+    $("#Updatestateopt").show();
+    $("#Updatestate").hide().val("");
+  } else {
+    $("#Updatestateopt").hide().val("");
+    $("#Updatestate").show();
+  }
+}
+
+function toggleUpdateCountry(country) {
+  if (country && country.toLowerCase() === "usa") {
+    $("#Addstateopt").show();
+    $("#Addstate").hide().val("");
+  } else {
+    $("#Addstateopt").hide().val("");
+    $("#Addstate").show();
+  }
+}
 
 async function loadCountries() {
   try {
@@ -1159,14 +1235,14 @@ function bindCountries(countries) {
   countries.forEach(c => {
 
  
-    ddl.append(`<option value="${c.ID}">${c.Title}</option>`);
+    ddl.append(`<option value="${c.Title}">${c.Title}</option>`);
 
     
-    $dd2.append(`<option value="${c.ID || c.Id}">${c.Title}</option>`);
+    $dd2.append(`<option value="${c.Title || c.Title}">${c.Title}</option>`);
 
     // Capture USA ID
     if (c.Title && c.Title.toLowerCase() === "usa") {
-      usaId = c.ID || c.Id;
+      usaId = c.Title || c.Title;
     }
   });
 
@@ -1178,6 +1254,91 @@ function bindCountries(countries) {
 }
 
 
+// Load State data
+
+async function loadState() {
+  try {
+
+    const response = await fetch(StateApiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})
+    });
+
+    if (!response.ok) {
+      throw new Error("API call failed");
+    }
+
+    let data = await response.json();
+
+    console.log("RAW data:", data);
+
+
+    if (!data.State) {
+      throw new Error("State not found in response");
+    }
+
+
+    let State = data.State;
+
+    if (typeof State === "string") {
+      State = JSON.parse(State);
+    }
+
+
+    if (!Array.isArray(State)) {
+      throw new Error("State is not an array");
+    }
+
+    bindState(State);
+
+
+
+
+
+  } catch (error) {
+    console.error("Country Load Error:", error);
+    $("#shortAlertText").text("Failed to load State");
+    $("#shortAlert").modal("show");
+    //alert("Failed to load countries");
+  }
+}
+
+
+
+
+function bindState(State) {
+console.log(State);
+ const ddl = $("#Addstateopt");
+  const dd2 = $("#Updatestateopt");
+
+  ddl.empty();
+  ddl.append(`<option value="">Select State</option>`);
+
+  dd2.empty();
+  dd2.append(`<option value="">Select State</option>`);
+
+  
+
+  //let usaId;
+
+   State.forEach(c => {
+    // Only USA states
+    if (c.CountryTitle?.toLowerCase() === "usa") {
+      ddl.append(`<option value="${c.Title}">${c.Title}</option>`);
+      dd2.append(`<option value="${c.Title}">${c.Title}</option>`);
+    }
+  });
+
+
+  // if (usaId) {
+  //   ddl.val(usaId);
+  //   dd2.val(usaId);
+   
+  // }
+}
 
 
 
@@ -1273,6 +1434,14 @@ function AddsignIn(btn) {
   if (!validateForm()) {
     return;
   }
+
+  const selectedCountry = $("#countrySelect option:selected").text().trim();
+const isUSA = selectedCountry.toLowerCase() === "usa";
+
+// pick state based on country
+const stateValue = isUSA
+  ? $("#Addstateopt").val()     // dropdown for USA
+  : $("#Addstate").val();      // textbox for other countries
   var payload = {
     Email: sessionStorage.getItem("userEmail") || localStorage.getItem("userEmail"),
 
@@ -1286,9 +1455,9 @@ function AddsignIn(btn) {
 
     Address: $("#Addaddress").val(),
     City: $("#Addcity").val(),
-    State: $("#Addstate").val(),
+    State: stateValue || "",
     ZipCode: $("#AddzipCode").val(),
-    Country: $("#countrySelect option:selected").text()
+    Country: selectedCountry
   };
 
    
@@ -1368,4 +1537,73 @@ function AddhandleResponse(result) {
       break
   }
 }
+
+
+
+
+///////
+
+function startOtpTimer() {
+  clearInterval(otpTimerInterval);
+
+  otpRemainingTime = 120;
+  $("#btnResendCode").hide();
+  $("#otpTimer").show();
+
+  updateOtpTimerText();
+
+  otpTimerInterval = setInterval(() => {
+    otpRemainingTime--;
+
+    if (otpRemainingTime <= 0) {
+      clearInterval(otpTimerInterval);
+      $("#otpTimer").hide();
+      $("#btnResendCode").show();
+    } else {
+      updateOtpTimerText();
+    }
+  }, 1000);
+}
+function updateOtpTimerText() {
+  const minutes = Math.floor(otpRemainingTime / 60);
+  const seconds = otpRemainingTime % 60;
+
+  $("#otpTimer").text(
+    `Code expires in ${minutes}:${seconds.toString().padStart(2, "0")}`
+  );
+}
+
+function resendCode() {
+
+  $("#EnterCode").val("");
+  $("#btnResendCode").hide();
+
+  const email =$("#youEmail").val(); // fallback
+
+  if (!email) {
+    alert("Email not found. Please refresh.");
+    return;
+  }
+
+  $.ajax({
+    url: SEND_CODE_FLOW_URL,
+    method: "POST",
+    data: JSON.stringify({ Email: email }),
+    contentType: "application/json; charset=utf-8",
+    processData: false,
+    headers: {
+      "Accept": "application/json"
+    },
+    success: function () {
+      alert("New code sent to your email");
+      startOtpTimer();
+    },
+    error: function (xhr) {
+      console.error("Resend failed:", xhr.responseText);
+      alert("Unable to resend code. Try again.");
+      $("#btnResendCode").show();
+    }
+  });
+}
+
 
