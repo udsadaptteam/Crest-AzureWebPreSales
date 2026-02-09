@@ -452,6 +452,35 @@ ul.nav.nav-tabs.all_tabsec li a:hover,
 
 
 
+
+
+.ssn-wrapper {
+  position: relative;
+}
+
+.ssn-wrapper input {
+  padding-right: 40px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+}
+
+.toggle-eye:hover {
+  color: #000;
+}
+
+
+
+ 
+
+
 @media(max-width:991px){
 .img_choose {
     margin: 15px 0px;
