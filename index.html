@@ -150,7 +150,22 @@
             <div class=" form-group enter_code_bx">
               <label>Enter Code:</label><label class="reding">*</label>
                 <input type="text" class="form-control" id="enterCode">
+
+                <div  id="otpSection" class="mt-2 text-center">
+  <span id="otpTimer" class="text-danger fw-bold"></span>
+
+  <button
+    id="btnResendCode"
+    class="btn"
+    style="display:none"
+    onclick="resendCode()"
+  >
+    Resend Code
+  </button>
+</div>
+
             </div>
+            
             <div class="password_area">
               <div class=" form-group">
                 <label>New Password:</label><label class="reding">*</label>
@@ -226,7 +241,7 @@
                   </div>
                   
                   <div class="col-md-6 form-group">
-                    <label>Designation</label>: 
+                    <label>Job Title</label>: 
                     <input type="text" id="Adddesignation" class="form-control">
                   </div>
                 </div><!---row ed-->
@@ -243,7 +258,10 @@
                   
                   <div class="col-md-6 form-group">
                     <label>State</label>: 
-                    <input type="text" id="Addstate" class="form-control">
+                      <select class="form-control" id="Addstateopt">
+                  <option selected>--select--</option>
+                </select>
+                    <input type="text" id="Addstate" class="form-control" style="display:none">
                   </div>
                   <div class="col-md-6 form-group">
                     <label>Zip Code</label>: 
@@ -356,7 +374,7 @@
               </div>
               
               <div class="col-md-6 form-group">
-                <label>Designation</label>: 
+                <label>Job Title</label>: 
                 <input type="text" id="Updatedesignation" class="form-control">
               </div>
             </div><!---row ed-->
@@ -373,7 +391,10 @@
               
               <div class="col-md-6 form-group">
                 <label>State</label>: 
-                <input type="text" id="Updatestate" class="form-control">
+                      <select class="form-control" id="Updatestateopt">
+                  <option selected>--select--</option>
+                </select>
+                <input type="text" id="Updatestate" class="form-control" style="display:none">
               </div>
               <div class="col-md-6 form-group">
                 <label>Zip Code</label>: 
