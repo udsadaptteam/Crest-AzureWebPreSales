@@ -200,12 +200,29 @@
               </select>
             </div>
           </div>
-          <div class="col-md-4" id="PersonalSocialSecurityDiv">
+          <!-- <div class="col-md-4" id="PersonalSocialSecurityDiv">
             <div class="form-group">
               <label for="">Social security</label>:
               <input type="text" id="PersonalSocialSecurity" class="form-control">
             </div>
+          </div> -->
+
+          <div class="col-md-4" id="PersonalSocialSecurityDiv">
+            <div class="form-group position-relative" >
+              <label>Social security</label>:
+              <!-- <div class="ssn-wrapper"> -->
+                <input type="text" id="PersonalSocialSecurity" class="form-control" autocomplete="off">
+  <!-- <span
+    style="position:absolute; right:10px; top:38px; cursor:pointer;"
+    onclick="toggleSSN()"
+  >👁</span> -->
+   <span class="toggle-eye" onclick="toggleSSN()">
+        👁
+      </span>
+              <!-- </div> -->
+            </div>
           </div>
+
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Marital status</label>:
@@ -404,7 +421,16 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">State</label>:
-                      <input type="text" class="form-control state" data-seq="1">
+                      <!-- <input type="text" class="form-control state" data-seq="1"> -->
+                      <!-- <select class="form-control state" data-seq="1" >
+                      <option selected>--select--</option>
+                    </select> -->
+                      <select class="form-control state state-dd" data-seq="1">
+                        <option value="">--select--</option>
+                      </select>
+
+                      <!-- State input (Non-USA) -->
+                      <input type="text" class="form-control state state-txt" data-seq="1" style="display:none" />
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -416,7 +442,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>:
-                      <input type="text" class="form-control country" data-seq="1">
+                      <select class="form-control country" data-seq="1">
+                        <option selected>--select--</option>
+                      </select>
+                      <!-- <input type="text" class="form-control country" data-seq="1"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -486,7 +515,17 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">State</label>:
-                      <input type="text" class="form-control state" data-seq="2">
+                      <!-- <select class="form-control state" data-seq="2" >
+                      <option selected>--select--</option>
+                    </select> -->
+                      <!-- State dropdown (USA) -->
+                      <select class="form-control state state-dd" data-seq="2" >
+                        <option value="">--select--</option>
+                      </select>
+
+                      <!-- State input (Non-USA) -->
+                      <input type="text" class="form-control state state-txt" data-seq="2" style="display:none" />
+                      <!-- <input type="text" class="form-control state" data-seq="2"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -498,7 +537,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>:
-                      <input type="text" class="form-control country" data-seq="2">
+                      <select class="form-control country" data-seq="2">
+                        <option selected>--select--</option>
+                      </select>
+                      <!-- <input type="text" class="form-control country" data-seq="2"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -568,7 +610,16 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">State</label>:
-                      <input type="text" class="form-control state" data-seq="3">
+                      <!-- <select class="form-control state" data-seq="3" >
+                      <option selected>--select--</option>
+                    </select> -->
+                      <select class="form-control state state-dd" data-seq="3">
+                        <option value="">--select--</option>
+                      </select>
+
+                      <!-- State input (Non-USA) -->
+                      <input type="text" class="form-control state state-txt" data-seq="3" style="display:none" />
+                      <!-- <input type="text" class="form-control state" data-seq="3"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -580,7 +631,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>:
-                      <input type="text" class="form-control country" data-seq="3">
+                      <select class="form-control country" data-seq="3">
+                        <option selected>--select--</option>
+                      </select>
+                      <!-- <input type="text" class="form-control country" data-seq="3"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -1160,7 +1214,11 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">State / Province</label>:
-                      <input type="text" id="PreferredState1" class="form-control">
+                      <select class="form-control" id="PreferredState1">
+                        <option selected>--select--</option>
+                      </select>
+                      <input type="text" class="form-control mt-1" id="PreferredStateText1" style="display:none;" />
+                      <!-- <input type="text" id="PreferredState1" class="form-control"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -1172,7 +1230,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>:
-                      <input type="text" id="PreferredCountry1" class="form-control">
+                      <select class="form-control" id="PreferredCountry1">
+                        <option selected>--select--</option>
+                      </select>
+                      <!-- <input type="text" id="PreferredCountry1" class="form-control"> -->
                     </div>
                   </div>
                 </div>
@@ -1206,7 +1267,11 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">State / Province</label>:
-                      <input type="text" id="PreferredState2" class="form-control">
+                      <select class="form-control" id="PreferredState2">
+                        <option selected>--select--</option>
+                      </select>
+                      <input type="text" class="form-control mt-1" id="PreferredStateText2" style="display:none;" />
+                      <!-- <input type="text" id="PreferredState2" class="form-control"> -->
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -1218,7 +1283,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="">Country</label>:
-                      <input type="text" id="PreferredCountry2" class="form-control">
+                      <select class="form-control" id="PreferredCountry2">
+                        <option selected>--select--</option>
+                      </select>
+                      <!-- <input type="text" id="PreferredCountry2" class="form-control"> -->
                     </div>
                   </div>
                 </div>
@@ -1330,18 +1398,26 @@
               <div class="form-group">
                 <label>Site City</label>:
                 <input type="text" id="RealEstateSiteCity" class="form-control">
+
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>State</label>:
-                <input type="text" id="RealEstateState" class="form-control">
+                <select class="form-control" id="RealEstateState">
+                  <option selected>--select--</option>
+                </select>
+                <input type="text" class="form-control" id="RealEstateStateText" style="display:none">
+                <!-- <input type="text" id="RealEstateState" class="form-control"> -->
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Country</label>:
-                <input type="text" id="RealEstateCountry" class="form-control">
+                <select class="form-control" id="RealEstateCountry">
+                  <option selected>--select--</option>
+                </select>
+                <!-- <input type="text" id="RealEstateCountry" class="form-control"> -->
               </div>
             </div>
             <div class="col-md-4">
