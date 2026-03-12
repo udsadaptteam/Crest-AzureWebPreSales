@@ -259,16 +259,21 @@
 
             </div>
           </div>
+
+           
           <div class="col-md-4" id="PersonalSpouseSocialSecurityDiv">
             <div class="form-group">
               <label for="">Spouse social security</label>:
-              <input type="text" id="PersonalSpouseSocialSecurity" class="form-control">
+              <input type="text" id="PersonalSpouseSocialSecurity" class="form-control" autocomplete="off">
+              <span class="toggle-eye" onclick="toggleSpouseSSNrender()">
+        👁
+      </span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Can you devote your full time to the business?</label>:
-              <select name="" id="PersonalFulltimeBusiness" class="form-control">
+              <select name="" id="PersonalFulltimeBusiness" class="form-control" >
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
