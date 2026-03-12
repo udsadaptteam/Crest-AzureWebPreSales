@@ -50,6 +50,10 @@ let ssnRealValue = "";
 let ssnVisible = false;
 const ssnInput = document.getElementById("PersonalSocialSecurity");
 
+let spouseSsnRealValue = "";
+let spouseSsnVisible = false;
+const spouseSsnInput = document.getElementById("PersonalSpouseSocialSecurity");
+
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("UserLoginname").innerText =
     `${localStorage.getItem("loginUserFullName")}`;
@@ -74,7 +78,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#ContactEnquiryDate").val(new Date().toISOString().split("T")[0]);
 
+$("input[type='date']").attr("min", "1900-01-01");
+$("input[type='date']").attr("max", "9999-12-31");
 
+$("input[type='number']").on("input", function () {
+
+  if ($(this).val() < 0) {
+    $(this).val(0);
+  }
+
+});
+$(".email").on("blur", function () {
+
+  const email = $(this).val().toString().trim();
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email !== "" && !emailPattern.test(email)) {
+
+    alert("Please enter a valid email address");
+
+    $(this).val("");
+    $(this).focus();
+
+  }
+
+});
 
   loadBrands();
   loadHearAboutBrand();
@@ -262,6 +291,25 @@ if (
 });
 });
 
+spouseSsnInput.addEventListener("keydown", function (e) {
+
+  if (["Tab","ArrowLeft","ArrowRight","Home","End"].includes(e.key)) return;
+
+  e.preventDefault();
+
+  if (e.key === "Backspace") {
+    spouseSsnRealValue = spouseSsnRealValue.slice(0, -1);
+    renderSpouseSSN();
+    return;
+  }
+
+  if (e.key.length !== 1) return;
+
+  spouseSsnRealValue += e.key;
+  renderSpouseSSN();
+
+});
+
 function splitFullName(fullName) {
   if (!fullName) return { FirstName: "", LastName: "" };
 
@@ -287,11 +335,13 @@ function toggleSpouseSSN(value) {
   } else {
     $("#PersonalSpouseSocialSecurityDiv").slideUp();
     $("#PersonalSpouseSocialSecurity").val("");
+      
   }
 }
 
 function toggleSpouseFields(status) {
   if (status === "Married") {
+    $("#PersonalSpouseUSCitizen").val("Yes");
     $("#SpouseNameDiv, #SpouseUSCitizenDiv, #SpouseBirthDateDiv, #PersonalSpouseSocialSecurityDiv").slideDown();
   } else {
     $("#SpouseNameDiv, #SpouseUSCitizenDiv, #SpouseBirthDateDiv, #PersonalSpouseSocialSecurityDiv").slideUp();
@@ -782,8 +832,8 @@ function handleEnquiryResponse(method, data) {
   if (!data || !data.Status) return;
 
   if (data.Status === "No record found") {
-    $("#shortAlertText").text("No record found");
-    $("#shortAlert").modal("show");
+   // $("#shortAlertText").text("No record found");
+   // $("#shortAlert").modal("show");
     // alert("No record found");
     return;
   }
@@ -984,7 +1034,8 @@ function submitPersonalDetails() {
     SpouseName: $("#PersonalSpouseName").val(),
     SpouseBirthDate: dateOrNull($("#PersonalSpouseBirthDate").val()), // yyyy-MM-dd
     SpouseUSCitizen: $("#PersonalSpouseUSCitizen").val(), // Yes / No
-    SpouseSocilSecurity: $("#PersonalSpouseSocialSecurity").val(),
+    SpouseSocilSecurity: spouseSsnRealValue,
+  //  SpouseSocilSecurity: $("#PersonalSpouseSocialSecurity").val(),
     FulltimeBusiness: $("#PersonalFulltimeBusiness").val() // Yes / No
   };
 
@@ -1058,12 +1109,16 @@ function bindPersonalDetails(data) {
   $("#PersonalSpouseName").val(data.SpouseName || "");
   $("#PersonalSpouseBirthDate").val(data.SpouseBirthDate || "");
   $("#PersonalSpouseUSCitizen").val(toYesNo(data.SpouseUSCitizen));
-  $("#PersonalSpouseSocialSecurity").val(data.SpouseSocilSecurity || "");
+ // $("#PersonalSpouseSocialSecurity").val(data.SpouseSocilSecurity || "");
   $("#PersonalFulltimeBusiness").val(toYesNo(data.FulltimeBusiness));
 
   ssnRealValue = data.SocialSecurity || "";
 ssnVisible = false;
 render();
+
+spouseSsnRealValue = data.SpouseSocilSecurity || "";
+spouseSsnVisible = false;
+renderSpouseSSN();
 
 
   toggleSpouseFields(data.MaritalStatus);
@@ -2366,13 +2421,18 @@ function setDate(selector, value) {
 function render() {
   ssnInput.value = ssnVisible ? ssnRealValue : "*".repeat(ssnRealValue.length);
 }
-
+function renderSpouseSSN() {
+  spouseSsnInput.value = spouseSsnVisible ? spouseSsnRealValue : "*".repeat(spouseSsnRealValue.length);
+}
 // Toggle eye
 function toggleSSN() {
   ssnVisible = !ssnVisible;
   render();
 }
-
+function toggleSpouseSSNrender() {
+  spouseSsnVisible = !spouseSsnVisible;
+  renderSpouseSSN();
+}
 
  
 
