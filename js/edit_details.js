@@ -48,6 +48,7 @@ let coApplicantIdMap = {
 
 let ssnRealValue = "";
 let ssnVisible = false;
+let NoRecordContact="";
 const ssnInput = document.getElementById("PersonalSocialSecurity");
 
 let spouseSsnRealValue = "";
@@ -198,10 +199,36 @@ $(".email").on("blur", function () {
 
 
 
+/*
+  $("#btnAddRealEstate").on("click", function () {
+    if(NoRecordContact=="Yes"){
+       $("#add_real_estate").modal("hide");
+      alert("Please fill in the contact details and try again.");
+       
+    }else{
+       addNewRealEstate();
+    }
+    
+  });*/
+
 
   $("#btnAddRealEstate").on("click", function () {
-    addNewRealEstate();
-  });
+
+  if (NoRecordContact == "Yes") {
+
+  //  alert("Please fill in the contact details and try again.");
+     $("#shortAlertText").text("Please fill in the contact details and try again.");
+      $("#shortAlert").modal("show");
+    return; //  
+
+  } else {
+
+    addNewRealEstate(); // optional (if needed)
+    $("#add_real_estate").modal("show"); // 
+
+  }
+
+});
 
 
 
@@ -467,15 +494,15 @@ function bindCountries(countries) {
   const dd4 = $("#RealEstateCountry")
 
   ddl.empty();
-  ddl.append(`<option value="">Select Country</option>`);
+  ddl.append(`<option   disabled>Select Country</option>`);
 
   dd2.empty();
-  dd2.append(`<option value="">Select Country</option>`);
+  dd2.append(`<option   disabled>Select Country</option>`);
 
   dd3.empty();
-  dd3.append(`<option value="">Select Country</option>`);
+  dd3.append(`<option   disabled>Select Country</option>`);
   dd4.empty();
-  dd4.append(`<option value="">Select Country</option>`);
+  dd4.append(`<option   disabled>Select Country</option>`);
 
   let usaId;
 
@@ -828,6 +855,8 @@ async function ContactDetailsData(method, payload) {
    RESPONSE HANDLER
 ========================= */
 function handleEnquiryResponse(method, data) {
+  console.log(data);
+  NoRecordContact="";
 
   if (!data || !data.Status) return;
 
@@ -835,6 +864,7 @@ function handleEnquiryResponse(method, data) {
    // $("#shortAlertText").text("No record found");
    // $("#shortAlert").modal("show");
     // alert("No record found");
+    NoRecordContact="Yes";
     return;
   }
 
@@ -1413,7 +1443,7 @@ function getStateValueByCountry(seq) {
   }
 }
 
-
+/*
 function buildCoApplicantPayload() {
 
   const coApplicants = [];
@@ -1446,12 +1476,62 @@ function buildCoApplicantPayload() {
 
   return coApplicants;
 }
+*/
 
 
+ 
+function buildCoApplicantPayload() {
+
+  const coApplicants = [];
+
+  for (let seq = 1; seq <= 3; seq++) {
+
+    const firstName = $(`.firstName[data-seq="${seq}"]`).val()?.trim();
+    const lastName = $(`.lastName[data-seq="${seq}"]`).val()?.trim();
+
+    // ONLY FIRST NAME REQUIRED
+    if (!firstName) continue;
+
+    coApplicants.push({
+      Id: coApplicantIdMap?.[seq] ? Number(coApplicantIdMap[seq]) : 0,
+      SequenceNo: seq,
+
+      FirstName: firstName,
+      MiddleName: $(`.middleName[data-seq="${seq}"]`).val() || "",
+      LastName: lastName || "", // ✅ optional now
+      Role: $(`.role[data-seq="${seq}"]`).val() || "",
+      Address: $(`.address[data-seq="${seq}"]`).val() || "",
+      City: $(`.city[data-seq="${seq}"]`).val() || "",
+      Zip: $(`.zip[data-seq="${seq}"]`).val() || "",
+      Country: $(`.country[data-seq="${seq}"]`).val() || "",
+      State: getStateValueByCountry(seq),
+      Phone: $(`.phone[data-seq="${seq}"]`).val() || "",
+      EmailAddress: $(`.email[data-seq="${seq}"]`).val() || ""
+    });
+  }
+
+  return coApplicants;
+}
 
 
 
 function submitCoApplicants() {
+    const firstName = $(`.firstName[data-seq="1"]`).val()?.trim();
+  const lastName = $(`.lastName[data-seq="1"]`).val()?.trim();
+
+  if (!firstName || !lastName) {
+
+    $("#shortAlertText").text("First Name and Last Name are required for Co-Applicant");
+    $("#shortAlert").modal("show");
+
+    if (!firstName) {
+      $(`.firstName[data-seq="1"]`).focus();
+    } else {
+      $(`.lastName[data-seq="1"]`).focus();
+    }
+
+    return; 
+  }
 
   const payload = {
     Email: localStorage.getItem("loginEmail"),
@@ -1503,11 +1583,12 @@ function sumInputs(containerSelector, totalInputSelector) {
 }
 
 function calculateNetWorth() {
+  const interst= parseFloat($("#IncometotalIncome").val()) || 0;
   const assets = parseFloat($("#AssetstotalAssets").val()) || 0;
   const liabilities = parseFloat($("#LiabilitiestotalLiabilities").val()) || 0;
   const contingent = parseFloat($("#ContingenttotalContingent").val()) || 0;
 
-  $("#netWorth").val(assets - (liabilities + contingent));
+  $("#netWorth").val((interst+assets) - (liabilities + contingent));
 }
 
 function cleanPayload(obj) {
@@ -2142,8 +2223,8 @@ const realEstateState =
     // State: RealstrOrUndefined($("#RealEstateState").val()),
     // Country: RealstrOrUndefined($("#RealEstateCountry").val()),
 
-    ParkingSpaces: RealstrOrUndefined($("#RealEstateParkingSpaces").val()),
-    PurchaseOption: RealstrOrUndefined($("#RealEstatePurchaseOption").val()),
+      ParkingSpaces: RealstrOrUndefined($("#RealEstateParkingSpaces").val()),
+      PurchaseOption: RealstrOrUndefined($("#RealEstatePurchaseOption").val()),
 
     BuildingSize: RealstrOrUndefined($("#RealEstateBuildingSize").val()),
     BuildingLength: RealstrOrUndefined($("#RealEstateBuildingLength").val()),
@@ -2156,7 +2237,7 @@ const realEstateState =
     ProjectedOpeningDate: RealdateOrUndefined($("#RealEstateProjectedOpeningDate").val()),
     ApprovalDate: RealdateOrUndefined($("#RealEstateApprovalDate").val()),
     TurnoverDate: RealdateOrUndefined($("#RealEstateTurnoverDate").val()),
-    PurchasedDate: RealdateOrUndefined($("#RealEstatePurchasedDate").val()),
+     PurchasedDate: RealdateOrUndefined($("#RealEstatePurchasedDate").val()),
 
     MortgageBalance: RealnumOrUndefined($("#RealEstateMortgageBalance").val()),
     OptionTerms: RealstrOrUndefined($("#RealEstateOptionTerms").val()),
@@ -2165,8 +2246,8 @@ const realEstateState =
     LeaseComDate: RealdateOrUndefined($("#RealEstateLeaseComDate").val()),
     LeaseExpDate: RealdateOrUndefined($("#RealEstateLeaseExpDate").val()),
 
-    PermitAppliedFor: RealstrOrUndefined($("#RealEstatePermitAppliedFor").val()),
-    GeneralContractorSelected: RealstrOrUndefined($("#RealEstateGeneralContractorSelected").val())
+     PermitAppliedFor: RealdateOrUndefined($("#RealEstatePermitAppliedFor").val()),
+  GeneralContractorSelected: RealstrOrUndefined($("#RealEstateGeneralContractorSelected").val())
   };
 
   $.ajax({
@@ -2390,7 +2471,7 @@ function editRealEstate(id) {
       setDate("#RealEstateLeaseComDate", res.LeaseComDate);
       setDate("#RealEstateLeaseExpDate", res.LeaseExpDate);
 
-      $("#RealEstatePermitAppliedFor").val(res.PermitAppliedFor);
+      setDate("#RealEstatePermitAppliedFor", res.PermitAppliedFor);
       $("#RealEstateGeneralContractorSelected").val(res.GeneralContractorSelected);
 
       const reCountry = (res.Country || "").toLowerCase();
